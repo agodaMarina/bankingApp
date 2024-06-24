@@ -5,6 +5,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserlistComponent } from './userlist/userlist.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { FactureComponent } from './facture/facture.component';
+import { SettingsComponent } from './settings/settings.component';
+import { FileComponent } from './file/file.component';
 
 const routes: Routes = [
 
@@ -13,12 +16,18 @@ const routes: Routes = [
       {path:'dashboard', component:DashboardComponent},
       {path:'profile', component:ProfileComponent},
       {path:'edit-profile', component:EditProfileComponent},
+
       {path:'listUsers', component:UserlistComponent},
+      {path:'factures',component:FactureComponent},
+      {path:'settings',component:SettingsComponent},
+      
+      {path:'images',component:FileComponent},
       {path:'', redirectTo:'dashboard', pathMatch:'full'}
 
   ]},
  
 ];
+
 
 
 @NgModule({

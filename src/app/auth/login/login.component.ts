@@ -24,19 +24,19 @@ export class LoginComponent {
 
   login() {
     this.errorMsg = [];
-    this.authService.loginuser(this.authRequest).subscribe({
+    this.authService.login({body:this.authRequest}).subscribe({
       next: (res) => {
         
         this.tokenService.token = res.token as string;
-        console.log(this.tokenService.token);
-        // this.router.navigate(['dashboard']);
+        this.router.navigate(['/home/dashboard']);
       },
       error: (err) => {
-        console.log(err);
+        console.log(this.authRequest);
+        
         if (err.error.validationErrors) {
           this.errorMsg = err.error.validationErrors;
         } else {
-          this.errorMsg.push(err.error.errorMsg);
+          this.errorMsg.push(err.error);
         }
       }
     });

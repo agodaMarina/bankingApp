@@ -15,7 +15,7 @@
         <div class="login-right-wrap">
           <h1>Connexion</h1>
           <p class="account-subtitle">Accedez à votre Tableau de bord</p>
-          <div class="alert alert-danger" role="alert" *ngIf="errorMsg.length">
+          <div class="alert"  role="alert" *ngIf="errorMsg.length">
             <p *ngFor="let msg of errorMsg">{{msg}}</p>
           </div>
           <form  #f="ngForm" (ngSubmit)="login()">

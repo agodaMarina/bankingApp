@@ -49,6 +49,10 @@ export class ImageControllerService extends BaseService {
     );
   }
 
+  uplaodImage(formData: FormData): Observable<any> {
+    return this.http.post(this.rootUrl, formData);
+  }
+
   /** Path part for operation `downloadImage()` */
   static readonly DownloadImagePath = '/images/{fileName}';
 

@@ -20,7 +20,7 @@ export class RegisterComponent {
   }
 
   login() {
-    this.router.navigate(['login']);
+    this.router.navigate(['/home/login']);
   }
 
   register() {
@@ -30,7 +30,7 @@ export class RegisterComponent {
     })
       .subscribe({
         next: () => {
-          this.router.navigate(['activate-account']);
+          this.router.navigate(['/auth/active-account']);
         },
         error: (err) => {
           this.errorMsg = err.error.validationErrors;

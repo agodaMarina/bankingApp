@@ -79,7 +79,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Entrez votre prénom"
+                  [placeholder]="user?.firstName || 'Enter your first name'"
                 />
               </div>
             </div>
@@ -89,7 +89,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Entrez votre nom"
+                  [placeholder]="user?.lastName || 'Enter your last name'"
                 />
               </div>
             </div>
@@ -99,7 +99,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Entrez votre email"
+                  [placeholder]="user?.email || 'Enter your email'"
                 />
               </div>
             </div>
@@ -109,7 +109,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="votre numero de telephone"
+                  [placeholder]="user?.telephone || 'Enter your phone number'"
                 />
               </div>
             </div>
@@ -118,8 +118,8 @@
                 <label>Genre</label>
                 <select class="select">
                   <option>selectionner une option</option>
-                  <option>Homme</option>
-                  <option>Femme</option>
+                  <option value="homme">Homme</option>
+                  <option value="femme">Femme</option>
                 </select>
               </div>
             </div>
@@ -175,7 +175,7 @@
             <div class="input-block mb-3">
               <label>code Postal</label>
               <input
-                type="text"
+               type="text"
                 class="form-control"
                 placeholder="Entrez votre code postal"
               />
@@ -188,7 +188,7 @@
                 class="btn btn-cancel bg-primary-light me-3"
                 >Annuler</a
               >
-              <a href="javascript:void(0);" class="btn btn-primary"
+              <a  class="btn btn-primary" onclick="updateProfile()"
                 >Enregistrer les changements</a
               >
             </div>

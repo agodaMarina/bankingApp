@@ -394,31 +394,10 @@
               <div class="col-md-12">
                 <div class="card-body">
                   <div class="form-groups-item">
-                    <h5 class="form-title">Profile Picture</h5>
-                    <div class="profile-picture">
-                      <div class="upload-profile">
-                        <div class="profile-img">
-                          <img
-                            id="blah"
-                            class="avatar"
-                            src="assets/img/profiles/avatar-10.jpg"
-                            alt="profile-img"
-                          />
-                        </div>
-                        <div class="add-profile">
-                          <h5>Upload a New Photo</h5>
-                          <span>Profile-pic.jpg</span>
-                        </div>
-                      </div>
-                      <div class="img-upload">
-                        <a class="btn btn-primary me-2">Upload</a>
-                        <a class="btn btn-remove">Remove</a>
-                      </div>
-                    </div>
                     <div class="row">
                       <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="input-block mb-3">
-                          <label>First Name</label>
+                          <label>Numéro</label>
                           <input
                             type="text"
                             class="form-control"
@@ -428,7 +407,7 @@
                       </div>
                       <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="input-block mb-3">
-                          <label>Last Name</label>
+                          <label>TVA</label>
                           <input
                             type="text"
                             class="form-control"
@@ -438,19 +417,19 @@
                       </div>
                       <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="input-block mb-3">
-                          <label>User Name</label>
+                          <label>TOTAL HT</label>
                           <input
-                            type="text"
+                            type="number"
                             class="form-control"
-                            placeholder="Enter User Name"
+                            placeholder="Entrer un montant "
                           />
                         </div>
                       </div>
                       <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="input-block mb-3">
-                          <label>Email</label>
+                          <label>Total TVA</label>
                           <input
-                            type="email"
+                            type="number"
                             class="form-control"
                             placeholder="Enter Email Address"
                           />
@@ -458,7 +437,7 @@
                       </div>
                       <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="input-block mb-3">
-                          <label>Phone Number</label>
+                          <label>Total TTC </label>
                           <input
                             type="text"
                             class="form-control"
@@ -467,53 +446,14 @@
                           />
                         </div>
                       </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-block mb-3">
-                          <label>Role</label>
-                          <select class="select">
-                            <option>Select Role</option>
-                            <option>Role 1</option>
-                            <option>Role 2</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="pass-group" id="3">
-                          <div class="input-block">
-                            <label>Password</label>
-                            <input
-                              type="password"
-                              class="form-control pass-input"
-                              placeholder=""
-                            />
-                            <span
-                              class="toggle-password feather-eye"
-                            ></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="pass-group" id="passwordInput2">
-                          <div class="input-block">
-                            <label>Confirm Password</label>
-                            <input
-                              type="password"
-                              class="form-control pass-input"
-                              placeholder=""
-                            />
-                            <span
-                              class="toggle-password feather-eye"
-                            ></span>
-                          </div>
-                        </div>
-                      </div>
+                     
                       <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="input-block">
-                          <label>Status</label>
+                          <label>Statut</label>
                           <select class="select">
-                            <option>Select Status</option>
-                            <option>Active</option>
-                            <option>Inactive</option>
+                            <option>Selectionner un Statut</option>
+                            <option>Actif</option>
+                            <option>Archivé</option>
                           </select>
                         </div>
                       </div>
@@ -529,14 +469,14 @@
               data-bs-dismiss="modal"
               class="btn btn-back cancel-btn me-2"
             >
-              Cancel
+              Annuler
             </button>
             <button
               type="submit"
               data-bs-dismiss="modal"
               class="btn btn-primary paid-continue-btn"
             >
-              Add User
+              Ajouter
             </button>
           </div>
         </form>

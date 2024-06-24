@@ -11,6 +11,8 @@ import { FactureComponent } from './facture/facture.component';
 import { RapportComponent } from './rapport/rapport.component';
 import { CompteComponent } from './compte/compte.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { SettingsComponent } from './settings/settings.component';
+import { FileComponent } from './file/file.component';
 
 
 
@@ -25,7 +27,9 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     FactureComponent,
     RapportComponent,
     CompteComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    SettingsComponent,
+    FileComponent
   ],
   imports: [
     CommonModule,

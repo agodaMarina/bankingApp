@@ -111,9 +111,9 @@ export class AuthenticationControllerService extends BaseService {
   }
 
 
-  loginuser(authRequest: AuthenticateRequest): Observable<AuthenticationResponse> {
-    return this.http.post<AuthenticationResponse>(`${this.rootUrl}/auth/login`, authRequest);
-  }
+  // loginuser(authRequest: AuthenticateRequest): Observable<AuthenticationResponse> {
+  //   return this.http.post<AuthenticationResponse>(`${this.rootUrl}/auth/login`, authRequest);
+  // }
 
 
   /** Path part for operation `changePassword()` */

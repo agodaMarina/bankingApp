@@ -2,50 +2,34 @@
   <div class="sidebar-inner slimscroll">
     <div id="sidebar-menu" class="sidebar-menu">
       <ul class="sidebar-vertical">
-        <li class="menu-title"><span>Main</span></li>
+        <li class="menu-title"><span>Menu</span></li>
         <li class="submenu">
           <a routerLink="dashboard"
             ><i class="fe fe-home"></i> <span> Dashboard</span>
-            </a>
-         
+          </a>
         </li>
         <li class="menu-title"><span>Factures</span></li>
-        <li class="submenu">
-          <a href=""
-            ><i class="fe fe-file"></i> <span>Factures</span
-            ><span class="menu-arrow"></span
-          ></a>
-          <ul style="display: none">
-            <li><a href="invoices.html">Invoices List</a></li>
-            <li>
-              <a href="invoice-details-admin.html">Invoice Details (Admin)</a>
-            </li>
-            <li>
-              <a href="invoice-details.html">Invoice Details (Customer)</a>
-            </li>
-            <li><a href="invoice-template.html">Invoice Templates</a></li>
-          </ul>
+        <li>
+          <a routerLink="factures"
+            ><i class="fe fe-file"></i> <span>Factures</span></a
+          >
         </li>
         <li class="menu-title"><span>Journaux</span></li>
         <li>
-          <a href="debit-notes.html"
-            ><i class="fe fe-file-text"></i> <span>Débit</span></a
+          <a routerLink="images"
+            ><i class="fe fe-file-text"></i> <span>Images</span></a
           >
         </li>
         <li>
           <a href="credit-notes.html"
-            ><i class="fe fe-edit"></i> <span>Crédit</span></a
+            ><i class="fe fe-edit"></i> <span>Crédit/débit</span></a
           >
         </li>
         <li class="menu-title"><span>Raports</span></li>
-        <li>
-          <a href="payment-summary.html"
-            ><i class="fe fe-credit-card"></i> <span>Payment Summary</span></a
-          >
-        </li>
+
         <li class="submenu">
-          <a href="#"
-            ><i class="fe fe-box"></i><span>Raports</span>
+          <a routerLink=""
+            ><i class="fe fe-box"></i><span>Raports </span>
 
             ></a
           >
@@ -53,19 +37,19 @@
 
         <li class="menu-title"><span>Utilisateurs</span></li>
         <li>
-          <a href="users.html"><i class="fe fe-user"></i> <span>Users</span></a>
+          <a routerLink="listUsers"
+            ><i class="fe fe-user"></i> <span>Users</span></a
+          >
         </li>
 
-        <li class="menu-title"><span>Settings</span></li>
+        <li class="menu-title"><span>Réglages</span></li>
         <li>
-          <a href="settings.html"
-            ><i class="fe fe-settings"></i> <span>Settings</span></a
+          <a routerLink="settings"
+            ><i class="fe fe-settings"></i> <span>Réglages</span></a
           >
         </li>
         <li>
-          <a href="login.html"
-            ><i class="fe fe-power"></i> <span>Logout</span></a
-          >
+          <a routerLink=""><i class="fe fe-power"></i> <span>Déconexion</span></a>
         </li>
       </ul>
     </div>
