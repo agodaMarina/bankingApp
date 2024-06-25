@@ -35,7 +35,8 @@
                 href="javascript:void(0);"
                 data-bs-toggle="modal"
                 data-bs-target="#add_user"
-                ><i class="fa fa-plus-circle me-2" aria-hidden="true"></i>ajouter</a
+                ><i class="fa fa-plus-circle me-2" aria-hidden="true"></i
+                >ajouter</a
               >
             </li>
           </ul>
@@ -77,15 +78,14 @@
                 <img src="assets/img/icons/receipt-item.svg" alt="invoice" />
               </span>
               <div class="dash-count">
-                <div class="dash-title">Total Invoice</div>
+                <div class="dash-title">Total Facture</div>
                 <div class="dash-counts">
-                  <p>$298</p>
+                  <p></p>
                 </div>
               </div>
             </div>
             <div class="d-flex justify-content-between align-items-center">
               <p class="inovices-all">
-                No of Invoice
                 <span class="rounded-circle bg-light-gray">02</span>
               </p>
               <p class="inovice-trending text-success-light">
@@ -236,27 +236,6 @@
       </div>
     </div>
 
-    <div class="card invoices-tabs-card">
-      <div class="invoices-main-tabs">
-        <div class="row align-items-center">
-          <div class="col-lg-12">
-            <div class="invoices-tabs">
-              <ul>
-                <li><a href="invoices.html" class="active">All</a></li>
-                <li><a href="invoices-paid.html">Paid</a></li>
-                <li><a href="invoices-overdue.html">Overdue</a></li>
-                <li><a href="invoices-cancelled.html">Cancelled</a></li>
-                <li><a href="invoices-recurring.html">Partially Paid</a></li>
-                <li><a href="invoices-unpaid.html">Unpaid</a></li>
-                <li><a href="invoices-refunded.html">Refunded</a></li>
-                <li><a href="invoices-draft.html">Draft</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="row">
       <div class="col-sm-12">
         <div class="card-table">
@@ -266,105 +245,86 @@
                 <thead class="thead-light">
                   <tr>
                     <th>
-                      <label class="custom_check">
-                        <input type="checkbox" name="invoice" />
-                        <span class="checkmark"></span> </label
-                      >Invoice ID
+                      #
                     </th>
-                    <th>Category</th>
-                    <th>Created On</th>
-                    <th>Invoice To</th>
-                    <th>Total</th>
-                    <th>Paid</th>
-                    <th>Payment Mode</th>
-                    <th>Balance</th>
-                    <th>Due Date</th>
-                    <th>Status</th>
+                    <th>Numero</th>
+                    <th>Client</th>
+                    <th>Tva</th>
+                    <th>Payé</th>
+                    <th>Mode de Payement</th>
+                    <th>Montant</th>
+                    <th>Date</th>
+                    <th>Statut</th>
                     <th class="text-end">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <label class="custom_check">
-                        <input type="checkbox" name="invoice" />
-                        <span class="checkmark"></span>
-                      </label>
-                      <a href="invoice-details.html" class="invoice-link"
-                        >#4987</a
-                      >
-                    </td>
-                    <td>Advertising</td>
-                    <td>23 Mar 2023</td>
-                    <td>
-                      <h2 class="table-avatar">
-                        <a href="profile.html" class="avatar avatar-sm me-2"
-                          ><img
-                            class="avatar-img rounded-circle"
-                            src="assets/img/profiles/avatar-14.jpg"
-                            alt="User Image"
-                        /></a>
-                        <a href="profile.html"
-                          >John Smith <span>+1 843-443-3282</span></a
-                        >
-                      </h2>
-                    </td>
-                    <td>$1,54,220</td>
-                    <td>$1,50,000</td>
-                    <td>Cash</td>
-                    <td>$0</td>
-                    <td>-</td>
-                    <td><span class="badge bg-success-light">Paid</span></td>
-                    <td class="text-end">
-                      <div class="dropdown dropdown-action">
-                        <a
-                          href="#"
-                          class="btn-action-icon"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                          ><i class="fas fa-ellipsis-v"></i
-                        ></a>
-                        <div
-                          class="dropdown-menu dropdown-menu-end customer-dropdown"
-                        >
-                          <a class="dropdown-item" href="edit-invoice.html"
-                            ><i class="far fa-edit me-2"></i>Edit</a
-                          >
-                          <a class="dropdown-item" href="invoice-details.html"
-                            ><i class="far fa-eye me-2"></i>View</a
-                          >
+                  
+                  <ng-container *ngFor="let item of factures ">
+
+                    <tr>
+                      <td>
+                       #
+                      </td>
+                      <td>{{item.numero}} </td>
+                      <td>N/A</td>
+                      <td>{{item.tva}}</td>
+                      <td>oui</td>
+                      <td>N/A</td>
+                      <td>{{item.totalttc}}</td>
+                      <td>-</td>
+                      <td><span class="badge bg-success-light">Payé</span></td>
+  
+                      <td class="text-end">
+                        <div class="dropdown dropdown-action">
                           <a
-                            class="dropdown-item"
+                            href="#"
+                            class="btn-action-icon"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            ><i class="fas fa-ellipsis-v"></i
+                          ></a>
+                          <div
+                            class="dropdown-menu dropdown-menu-end customer-dropdown"
+                          >
+                            <a class="dropdown-item" 
+                              href="javascript:void(0);"
+                              data-bs-toggle="modal"
+                              data-bs-target="#edit_user"
+                              [attr.data-id]="item.id ? item.id : null"
+                              ><i class="far fa-edit me-2"></i>modifer</a
+                            >
+                            <a 
+                            class="dropdown-item" href="javascript:void(0);" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#view_invoice"
+                            
+                              ><i class="far fa-eye me-2"></i>voir</a
+                            >
+                            <a
+                              class="dropdown-item"
+                              href="javascript:void(0);"
+                              data-bs-toggle="modal"
+                              data-bs-target="#delete_modal"
+                              [attr.data-id]="item.id"
+                              (click)="setFactureIdToDelete(item.id)"
+                              ><i class="far fa-trash-alt me-2"></i>supprimer
+                            </a>
+                        <!--    <a class="dropdown-item" 
                             href="javascript:void(0);"
-                            data-bs-toggle="modal"
-                            data-bs-target="#view_modal"
-                            ><i class="far fa-eye me-2"></i>View Delivery
-                            Challans</a
-                          >
-                          <a
-                            class="dropdown-item"
-                            href="javascript:void(0);"
-                            data-bs-toggle="modal"
-                            data-bs-target="#delete_modal"
-                            ><i class="far fa-trash-alt me-2"></i>Delete</a
-                          >
-                          <a class="dropdown-item" href=""
-                            ><i class="fe fe-send me-2"></i>Send</a
-                          >
-                          <a class="dropdown-item" href=""
-                            ><i class="fe fe-download me-2"></i>Download</a
-                          >
-                          <a class="dropdown-item" href="add-credit-notes.html"
-                            ><i class="fe fe-file-text me-2"></i>Convert to
-                            Sales Return</a
-                          >
-                          <a class="dropdown-item" href=""
-                            ><i class="fe fe-copy me-2"></i>Clone as Invoice</a
-                          >
+                              ><i class="fe fe-send me-2"></i>Envoyé</a
+                            >
+                            <a class="dropdown-item" href="javascript:void(0);"
+                              ><i class="fe fe-download me-2"></i>telecharger</a
+                            >--> 
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
+                  </ng-container>
+
+                  
+               
                 </tbody>
               </table>
             </div>
@@ -375,322 +335,256 @@
   </div>
 </div>
 <div class="modal custom-modal modal-lg fade" id="add_user" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-md">
-      <div class="modal-content">
-        <div class="modal-header border-0 pb-0">
-          <div class="form-header modal-header-title text-start mb-0">
-            <h4 class="mb-0">Ajouter une Facure</h4>
-          </div>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <div class="form-header modal-header-title text-start mb-0">
+          <h4 class="mb-0">Ajouter une Facture</h4>
         </div>
-        <form action="#">
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card-body">
-                  <div class="form-groups-item">
-                    <div class="row">
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-block mb-3">
-                          <label>Numéro</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Enter First Name"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-block mb-3">
-                          <label>TVA</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Enter Last Name"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-block mb-3">
-                          <label>TOTAL HT</label>
-                          <input
-                            type="number"
-                            class="form-control"
-                            placeholder="Entrer un montant "
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-block mb-3">
-                          <label>Total TVA</label>
-                          <input
-                            type="number"
-                            class="form-control"
-                            placeholder="Enter Email Address"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-block mb-3">
-                          <label>Total TTC </label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Enter Phone Number"
-                            name="name"
-                          />
-                        </div>
-                      </div>
-                     
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-block">
-                          <label>Statut</label>
-                          <select class="select">
-                            <option>Selectionner un Statut</option>
-                            <option>Actif</option>
-                            <option>Archivé</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              data-bs-dismiss="modal"
-              class="btn btn-back cancel-btn me-2"
-            >
-              Annuler
-            </button>
-            <button
-              type="submit"
-              data-bs-dismiss="modal"
-              class="btn btn-primary paid-continue-btn"
-            >
-              Ajouter
-            </button>
-          </div>
-        </form>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
-    </div>
-  </div>
-  <div
-    class="modal custom-modal modal-lg fade"
-    id="edit_user"
-    role="dialog"
-  >
-    <div class="modal-dialog modal-dialog-centered modal-md">
-      <div class="modal-content">
-        <div class="modal-header border-0 pb-0">
-          <div class="form-header modal-header-title text-start mb-0">
-            <h4 class="mb-0">Modification de Facture</h4>
-          </div>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <form action="#">
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card-body">
-                  <div class="form-groups-item">
-                    <h5 class="form-title">Profile Picture</h5>
-                    <div class="profile-picture">
-                      <div class="upload-profile">
-                        <div class="profile-img">
-                          <img
-                            id="blah2"
-                            class="avatar"
-                            src="assets/img/profiles/avatar-10.jpg"
-                            alt="profile-img"
-                          />
-                        </div>
-                        <div class="add-profile">
-                          <h5>Upload a New Photo</h5>
-                          <span>Profile-pic.jpg</span>
-                        </div>
-                      </div>
-                      <div class="img-upload">
-                        <label class="btn btn-primary">
-                          Upload <input type="file" />
-                        </label>
-                        <a class="btn btn-remove">Remove</a>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-block mb-3">
-                          <label>First Name</label>
-                          <input
-                            type="text"
-                            value="John"
-                            class="form-control"
-                            placeholder="Enter First Name"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-block mb-3">
-                          <label>Last Name</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            value="Smith"
-                            placeholder="Enter Last Name"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-block mb-3">
-                          <label>User Name</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            value="John Smith"
-                            placeholder="Enter User Name"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-block mb-3">
-                          <label>Email</label>
-                          <input
-                            type="email"
-                            class="form-control"
-                            value="john@example.com"
-                            placeholder="Enter Email Address"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-block mb-3">
-                          <label>Phone Number</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            value="+1 989-438-3131"
-                            placeholder="Enter Phone Number"
-                            name="name"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-block mb-3">
-                          <label>Role</label>
-                          <select class="select">
-                            <option>Select Role</option>
-                            <option selected="">Role 1</option>
-                            <option>Role 2</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="pass-group" id="passwordInput1">
-                          <div class="input-block">
-                            <label>Password</label>
-                            <input
-                              type="password"
-                              class="form-control pass-input"
-                              value="12345678"
-                              placeholder=""
-                            />
-                            <span
-                              class="toggle-password feather-eye"
-                            ></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="pass-group" id="passwordInput4">
-                          <div class="input-block">
-                            <label>Confirm Password</label>
-                            <input
-                              type="password"
-                              class="form-control pass-input"
-                              value="12345678"
-                              placeholder=""
-                            />
-                            <span
-                              class="toggle-password feather-eye"
-                            ></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-block">
-                          <label>Status</label>
-                          <select class="select">
-                            <option>Select Status</option>
-                            <option selected="">Active</option>
-                            <option>Inactive</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              data-bs-dismiss="modal"
-              class="btn btn-primary paid-cancel-btn me-2"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              data-bs-dismiss="modal"
-              class="btn btn-primary paid-continue-btn"
-            >
-              Update
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <div class="modal custom-modal fade" id="delete_modal" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-md">
-      <div class="modal-content">
+      <form [formGroup]="factureForm" (ngSubmit)="onSubmit()">
         <div class="modal-body">
-          <div class="form-header">
-            <h3>Supprimer une Facture</h3>
-            <p>êtes vous sûr de Supprimer?</p>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card-body">
+                <div class="form-groups-item">
+                  <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label>Numéro</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="numero"
+                          placeholder="Entez le Numéro de la facture"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label>TVA</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="tva"
+                          placeholder="Entez la TVA appliquée (%)"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label>TOTAL HT</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          formControlName="totalht"
+                          placeholder="Entez le  Montant Hors Taxe"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label>Total TVA</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          formControlName="totaltva"
+                        
+                          
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label>Total TTC</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="totalttc"
+                          
+                         
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="input-block">
+                        <label>Statut</label>
+                        <select class="select">
+                          <option>Selectionner un Statut</option>
+                          <option >Actif</option>
+                          <option>Archivé</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="modal-btn delete-action">
-            <div class="row">
-              <div class="col-6">
-                <a href="#" class="btn btn-primary paid-continue-btn"
-                  >Supprimer</a
-                >
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            data-bs-dismiss="modal"
+            class="btn btn-back cancel-btn me-2"
+          >
+            Annuler
+          </button>
+          <button
+            type="submit"
+            data-bs-dismiss="modal"
+            class="btn btn-primary paid-continue-btn"
+          >
+            Ajouter
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+</div>
+<div class="modal custom-modal modal-lg fade" id="edit_user" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <div class="form-header modal-header-title text-start mb-0">
+          <h4 class="mb-0">Modification de Facture</h4>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form #f="ngForm">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card-body">
+                <div class="form-groups-item">
+                  <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label>Numéro</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          disabled
+                          value=""
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label>TVA</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Last Name"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label>TOTAL HT</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          placeholder="Entrer un montant "
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label>Total TVA</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          placeholder="Enter Email Address"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label>Total TTC </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Phone Number"
+                          name="name"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="input-block">
+                        <label>Statut</label>
+                        <select class="select">
+                          <option>Selectionner un Statut</option>
+                          <option>Actif</option>
+                          <option>Archivé</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="col-6">
-                <a
-                  href="#"
-                  data-bs-dismiss="modal"
-                  class="btn btn-primary paid-cancel-btn"
-                  >Annuler</a
-                >
-              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            data-bs-dismiss="modal"
+            class="btn btn-back cancel-btn me-2"
+          >
+            Annuler
+          </button>
+          <button
+            type="submit"
+            data-bs-dismiss="modal"
+            class="btn btn-primary paid-continue-btn"
+          >
+            Ajouter
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal custom-modal fade" id="delete_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Supprimer une Facture</h3>
+          <p>êtes vous sûr de Supprimer?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a href="javascript:void(0);" class="btn btn-primary paid-continue-btn"(click)="deleteFacture()"
+                >Supprimer</a
+              >
+            </div>
+            <div class="col-6">
+              <a
+                href="#"
+                data-bs-dismiss="modal"
+                class="btn btn-primary paid-cancel-btn"
+                >Annuler</a
+              >
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

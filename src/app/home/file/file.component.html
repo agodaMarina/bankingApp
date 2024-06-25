@@ -1,52 +1,48 @@
 <div class="page-wrapper">
-    <div class="content container-fluid">
-      <div class="page-header">
-        <div class="content-page-header">
-          <h5>File Upload</h5>
-        </div>
+  <div class="content container-fluid">
+    <div class="page-header">
+      <div class="content-page-header">
+        <h5>Gestion d'images</h5>
       </div>
+    </div>
 
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-header">
-              <h5 class="card-title">Charger une image</h5>
-            </div>
-            <div class="card-body">
-              <div
-                class="custom-file-container"
-                data-upload-id="myFirstImage"
-              >
-                <label
-                  >Charger (Max 10MB)
-                  <a
-                    href="javascript:void(0)"
-                    class="custom-file-container__image-clear"
-                    title="Clear Image"
-                    ></a
-                  ></label
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">Chargez vos images </h5>
+          </div>
+          <div class="card-body">
+            <div class="custom-file-container" data-upload-id="myFirstImage">
+              <label>
+                Upload (10MB max)
+                <a
+                  href="javascript:void(0)"
+                  class="custom-file-container__image-clear"
+                  title="Clear Image"
+                  (click)="clearImage()"
+                  ></a
                 >
-                <label class="custom-file-container__custom-file">
-                  <input
-                    type="file"
-                    (change)="onFileSelected($event)"
-                    class="custom-file-container__custom-file__custom-file-input"
-                    accept="image/*"
-                  />
-                  <input
-                    type="hidden"
-                    name="MAX_FILE_SIZE"
-                    value="10485760"
-                  />
-                  <span
-                    class="custom-file-container__custom-file__custom-file-control"
-                  ></span>
-                </label>
-                <div class="custom-file-container__image-preview"></div>
+              </label>
+              <label class="custom-file-container__custom-file">
+                <input
+                  type="file"
+                  class="custom-file-container__custom-file__custom-file-input"
+                  accept="image/*"
+                  (change)="onFileSelected($event)"
+                />
+                <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                <span class="custom-file-container__custom-file__custom-file-control"></span>
+              </label>
+              <div class="custom-file-container__image-preview">
+                <img *ngIf="imagePreview" [src]="imagePreview" alt="Image Preview" class="img-thumbnail mt-2" />
               </div>
+              <button *ngIf="imagePreview" (click)="loadImage()" class="btn btn-primary mt-3">Upload</button>
+              <button *ngIf="imagePreview" (click)="clearImage()" class="btn btn-secondary mt-3">Cancel</button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

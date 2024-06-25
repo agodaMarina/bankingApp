@@ -13,6 +13,8 @@ import { CompteComponent } from './compte/compte.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { SettingsComponent } from './settings/settings.component';
 import { FileComponent } from './file/file.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -33,7 +35,9 @@ import { FileComponent } from './file/file.component';
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class HomeModule { }

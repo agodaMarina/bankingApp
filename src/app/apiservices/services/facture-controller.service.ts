@@ -73,6 +73,10 @@ export class FactureControllerService extends BaseService {
     );
   }
 
+  getAllFactures(): Observable<Array<Facture>> {
+    return this.http.get<Array<Facture>>(this.rootUrl + '/facture/getFacture');
+  }
+
   /** Path part for operation `deleteFacture()` */
   static readonly DeleteFacturePath = '/facture/deleteFacture/{id}';
 

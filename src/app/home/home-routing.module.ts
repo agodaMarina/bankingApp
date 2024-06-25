@@ -8,6 +8,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { FactureComponent } from './facture/facture.component';
 import { SettingsComponent } from './settings/settings.component';
 import { FileComponent } from './file/file.component';
+import { CompteComponent } from './compte/compte.component';
+import { RapportComponent } from './rapport/rapport.component';
 
 const routes: Routes = [
 
@@ -22,6 +24,8 @@ const routes: Routes = [
       {path:'settings',component:SettingsComponent},
       
       {path:'images',component:FileComponent},
+      {path:'comptes',component:CompteComponent},
+      {path:'rapports',component:RapportComponent},
       {path:'', redirectTo:'dashboard', pathMatch:'full'}
 
   ]},

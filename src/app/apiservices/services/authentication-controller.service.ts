@@ -27,6 +27,7 @@ import { AuthenticateRequest } from '../models/authenticate-request';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationControllerService extends BaseService {
+  
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
@@ -141,6 +142,9 @@ export class AuthenticationControllerService extends BaseService {
     );
   }
 
+  getAll(): Observable<Array<User>> {
+    throw new Error('Method not implemented.');
+  }
   /** Path part for operation `getProfile()` */
   static readonly GetProfilePath = '/auth/profile';
 
