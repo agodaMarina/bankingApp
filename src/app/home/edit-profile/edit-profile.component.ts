@@ -9,7 +9,7 @@ import { AuthenticationControllerService } from 'src/app/apiservices/services';
 })
 export class EditProfileComponent implements OnInit{
 
-  user?:User;
+  user:User={};
   userUpdate: UpdateProfilRequest = { email: '', firstName: '', lastName: '', telephone: ''};
 
   constructor(private profile:AuthenticationControllerService) { }
@@ -19,10 +19,15 @@ export class EditProfileComponent implements OnInit{
 
 
 
-  getProfile() {
-    this.profile.getProfile().subscribe((data: User) => {
+  getProfile():User {
+    
+    this.profile.getProfileuser().subscribe((data: User) => {
+      console.log(data);
       this.user = data;
+
     });
+    return this.user;
+    
   }
 
   updateProfile() {

@@ -44,47 +44,51 @@
                     <th>Email</th>
                     <th>Telephone</th>
                     <th>Rôle</th>
-                    <th>Activité</th>
-                    <th>Actif depuis</th>
                     <th>Statut</th>
+                    <th></th>
                     <th class="no-sort">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr *ngFor="let u of users">
                     <td>6</td>
                     <td>
                       <h2 class="table-avatar">
-                        <a href="profile.html" class="avatar avatar-sm me-2"
-                          ><img
-                            class="avatar-img rounded-circle"
-                            src="assets/img/profiles/avatar-19.jpg"
-                            alt="User Image"
-                        /></a>
-                        <a href="profile.html"
-                          >Randall
+                        
+                        <a 
+                          >{{u.firstName}} {{u.lastName}}
                           <span
                             ><span
                               class="__cf_email__"
                               data-cfemail="8dffece3e9ece1e1cde8f5ece0fde1e8a3eee2e0"
-                              >[email&#160;protected]</span
+                              >{{u.email}}</span
                             ></span
                           ></a
                         >
                       </h2>
                     </td>
-                    <td>+1 117-409-0861</td>
-                    <td>$1,789</td>
+                    <td>{{u.telephone}}</td>
+                    <td>{{u.role}}</td>
                     <td>
-                      <span class="badge bg-ash-gray text-gray-light"
-                        >2 days ago</span
+                      <span *ngIf="!u.accountNonLocked"
+                      class="badge bg-ash-gray text-gray-light"
+                        >Restreint</span
                       >
+                      <span *ngIf="u.accountNonLocked"
+                      class="badge bg-success-light">Actif</span>
                     </td>
-                    <td>04 Dec 2023, 12:38 PM</td>
+
                     <td>
-                      <span class="badge bg-ash-gray text-gray-light"
-                        >Restricted</span
-                      >
+                      <div class="status-toggle">
+                        <input
+                          id="rating_{{u.id}}"
+                          class="check"
+                          type="checkbox"
+                          [checked]="u.accountNonLocked"
+                          (click)="confirmActivation(u)"
+                        />
+                        <label for="rating_{{u.id}}" class="checktoggle checkbox-bg">checkbox</label>
+                      </div>
                     </td>
                     <td class="d-flex align-items-center">
                       <div class="dropdown dropdown-action">
@@ -103,7 +107,8 @@
                                 href="javascript:void(0);"
                                 data-bs-toggle="modal"
                                 data-bs-target="#edit_user"
-                                ><i class="far fa-edit me-2"></i>Edit</a
+                                (click)="getOneUser(u.id)"
+                                ><i class="far fa-eye me-2"></i>voir</a
                               >
                             </li>
                             <li>
@@ -129,225 +134,6 @@
     </div>
   </div>
 </div>
-
-<div class="toggle-sidebar">
-  <div class="sidebar-layout-filter">
-    <div class="sidebar-header">
-      <h5>Filter</h5>
-      <a href="#" class="sidebar-closes"
-        ><i class="fa-regular fa-circle-xmark"></i
-      ></a>
-    </div>
-    <div class="sidebar-body">
-      <form action="#" autocomplete="off">
-        <div class="accordion" id="accordionMain1">
-          <div class="card-header-new" id="headingOne">
-            <h6 class="filter-title">
-              <a
-                href="javascript:void(0);"
-                class="w-100"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseOne"
-                aria-expanded="true"
-                aria-controls="collapseOne"
-              >
-                Utilisateurs
-                <span class="float-end"
-                  ><i class="fa-solid fa-chevron-down"></i
-                ></span>
-              </a>
-            </h6>
-          </div>
-          <div
-            id="collapseOne"
-            class="collapse show"
-            aria-labelledby="headingOne"
-            data-bs-parent="#accordionExample1"
-          >
-            <div class="card-body-chat">
-              <div class="row">
-                <div class="col-md-12">
-                  <div id="checkBoxes1">
-                    <div class="form-custom">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="member_search1"
-                        placeholder="Search here"
-                      />
-                      <span
-                        ><img src="assets/img/icons/search.svg" alt="img"
-                      /></span>
-                    </div>
-                    <div class="selectBox-cont">
-                      <label class="custom_check w-100">
-                        <input type="checkbox" name="username" />
-                        <span class="checkmark"></span> John Smith
-                      </label>
-                      <label class="custom_check w-100">
-                        <input type="checkbox" name="username" />
-                        <span class="checkmark"></span> Johnny
-                      </label>
-                      <label class="custom_check w-100">
-                        <input type="checkbox" name="username" />
-                        <span class="checkmark"></span> Robert
-                      </label>
-                      <label class="custom_check w-100">
-                        <input type="checkbox" name="username" />
-                        <span class="checkmark"></span> Sharonda
-                      </label>
-
-                      <div class="view-content">
-                        <div class="viewall-One">
-                          <label class="custom_check w-100">
-                            <input type="checkbox" name="username" />
-                            <span class="checkmark"></span> Pricilla
-                          </label>
-                          <label class="custom_check w-100">
-                            <input type="checkbox" name="username" />
-                            <span class="checkmark"></span> Randall
-                          </label>
-                        </div>
-                        <div class="view-all">
-                          <a
-                            href="javascript:void(0);"
-                            class="viewall-button-One"
-                            ><span class="me-2">View All</span
-                            ><span
-                              ><i
-                                class="fa fa-circle-chevron-down"
-                              ></i></span
-                          ></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion" id="accordionMain2">
-          <div class="card-header-new" id="headingTwo">
-            <h6 class="filter-title">
-              <a
-                href="javascript:void(0);"
-                class="w-100 collapsed"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo"
-                aria-expanded="true"
-                aria-controls="collapseTwo"
-              >
-                Select Date
-                <span class="float-end"
-                  ><i class="fa-solid fa-chevron-down"></i
-                ></span>
-              </a>
-            </h6>
-          </div>
-          <div
-            id="collapseTwo"
-            class="collapse"
-            aria-labelledby="headingTwo"
-            data-bs-parent="#accordionExample2"
-          >
-            <div class="card-body-chat">
-              <div class="input-block mb-3">
-                <label class="form-control-label">From</label>
-                <div class="cal-icon">
-                  <input
-                    type="email"
-                    class="form-control datetimepicker"
-                    placeholder="DD-MM-YYYY"
-                  />
-                </div>
-              </div>
-              <div class="input-block mb-3">
-                <label class="form-control-label">To</label>
-                <div class="cal-icon">
-                  <input
-                    type="email"
-                    class="form-control datetimepicker"
-                    placeholder="DD-MM-YYYY"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion accordion-last" id="accordionMain3">
-          <div class="card-header-new" id="headingThree">
-            <h6 class="filter-title">
-              <a
-                href="javascript:void(0);"
-                class="w-100 collapsed"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseThree"
-                aria-expanded="true"
-                aria-controls="collapseThree"
-              >
-                By Status
-                <span class="float-end"
-                  ><i class="fa-solid fa-chevron-down"></i
-                ></span>
-              </a>
-            </h6>
-          </div>
-          <div
-            id="collapseThree"
-            class="collapse"
-            aria-labelledby="headingThree"
-            data-bs-parent="#accordionExample3"
-          >
-            <div class="card-body-chat">
-              <div id="checkBoxes2">
-                <div class="form-custom">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="member_search2"
-                    placeholder="Search here"
-                  />
-                  <span
-                    ><img src="assets/img/icons/search.svg" alt="img"
-                  /></span>
-                </div>
-                <div class="selectBox-cont">
-                  <label class="custom_check w-100">
-                    <input type="checkbox" name="bystatus" />
-                    <span class="checkmark"></span> Active
-                  </label>
-                  <label class="custom_check w-100">
-                    <input type="checkbox" name="bystatus" />
-                    <span class="checkmark"></span> Restricted
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="filter-buttons">
-          <button
-            type="submit"
-            class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary"
-          >
-            Apply
-          </button>
-          <button
-            type="submit"
-            class="d-inline-flex align-items-center justify-content-center btn w-100 btn-secondary"
-          >
-            Reset
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
 
 <div class="modal custom-modal modal-lg fade" id="add_user" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-md">
@@ -528,7 +314,7 @@
       <div class="modal-content">
         <div class="modal-header border-0 pb-0">
           <div class="form-header modal-header-title text-start mb-0">
-            <h4 class="mb-0">Edit User</h4>
+            <h4 class="mb-0">Détails de l'utilisateur{{user.firstName}} </h4>
           </div>
           <button
             type="button"
@@ -569,34 +355,23 @@
                     <div class="row">
                       <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="input-block mb-3">
-                          <label>First Name</label>
+                          <label>Nom</label>
                           <input
                             type="text"
-                            value="John"
                             class="form-control"
-                            placeholder="Enter First Name"
+                            disabled
+                            [placeholder]="user.firstName"
                           />
                         </div>
                       </div>
                       <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="input-block mb-3">
-                          <label>Last Name</label>
+                          <label>Prénom(s)</label>
                           <input
                             type="text"
                             class="form-control"
-                            value="Smith"
-                            placeholder="Enter Last Name"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="input-block mb-3">
-                          <label>User Name</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            value="John Smith"
-                            placeholder="Enter User Name"
+                            disabled
+                            [placeholder]="user.lastName"
                           />
                         </div>
                       </div>
@@ -606,53 +381,39 @@
                           <input
                             type="email"
                             class="form-control"
-                            value="john@example.com"
-                            placeholder="Enter Email Address"
+                            disabled
+                            [placeholder]="user.email"
                           />
                         </div>
                       </div>
                       <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="input-block mb-3">
-                          <label>Phone Number</label>
+                          <label>Telephone</label>
                           <input
                             type="text"
                             class="form-control"
-                            value="+1 989-438-3131"
-                            placeholder="Enter Phone Number"
-                            name="name"
+                            disabled
+                            [placeholder]="user.telephone"
+                            
                           />
                         </div>
                       </div>
                       <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="input-block mb-3">
-                          <label>Role</label>
-                          <select class="select">
-                            <option>Select Role</option>
-                            <option selected="">Role 1</option>
-                            <option>Role 2</option>
-                          </select>
+                          <label>Rôle</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            disabled
+                            [placeholder]="user.role"
+                            
+                          />
                         </div>
                       </div>
                       <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="pass-group" id="passwordInput1">
                           <div class="input-block">
-                            <label>Password</label>
-                            <input
-                              type="password"
-                              class="form-control pass-input"
-                              value="12345678"
-                              placeholder=""
-                            />
-                            <span
-                              class="toggle-password feather-eye"
-                            ></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="pass-group" id="passwordInput4">
-                          <div class="input-block">
-                            <label>Confirm Password</label>
+                            <label> Mot de Passe</label>
                             <input
                               type="password"
                               class="form-control pass-input"
@@ -667,12 +428,9 @@
                       </div>
                       <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="input-block">
-                          <label>Status</label>
-                          <select class="select">
-                            <option>Select Status</option>
-                            <option selected="">Active</option>
-                            <option>Inactive</option>
-                          </select>
+                          <label>Statut</label>
+                          <p *ngIf="user.accountNonLocked" class="badge bg-success-light"> Actif</p>
+                          <p *ngIf="!user.accountNonExpired" class="badge bg-ash-gray text-gray-light">Inactif</p>
                         </div>
                       </div>
                     </div>

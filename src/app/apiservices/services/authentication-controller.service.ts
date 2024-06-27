@@ -86,6 +86,10 @@ export class AuthenticationControllerService extends BaseService {
     );
   }
 
+  logout(): Observable<void> {
+    return this.http.post<void>(`${this.rootUrl}/auth/logout`, {});
+  }
+
   /** Path part for operation `login()` */
   static readonly LoginPath = '/auth/login';
 
@@ -112,9 +116,12 @@ export class AuthenticationControllerService extends BaseService {
   }
 
 
-  // loginuser(authRequest: AuthenticateRequest): Observable<AuthenticationResponse> {
-  //   return this.http.post<AuthenticationResponse>(`${this.rootUrl}/auth/login`, authRequest);
-  // }
+  loginuser(authRequest: AuthenticateRequest): Observable<AuthenticationResponse> {
+    return this.http.post<AuthenticationResponse>(`${this.rootUrl}/auth/login`, authRequest, {
+      observe: 'body',  // Option pour observer le corps de la réponse
+      responseType: 'json'  // Option pour s'assurer que la réponse est interprétée comme JSON
+    });
+  }
 
 
   /** Path part for operation `changePassword()` */
@@ -168,6 +175,10 @@ export class AuthenticationControllerService extends BaseService {
     return this.getProfile$Response(params, context).pipe(
       map((r: StrictHttpResponse<User>): User => r.body)
     );
+  }
+  getProfileuser():Observable<User>{
+    return this.http.get<User>(`${this.rootUrl}/auth/profile`)
+
   }
 
   /** Path part for operation `activeAccount()` */

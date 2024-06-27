@@ -63,14 +63,12 @@
             </h2>
             <ul class="list-inline">
               <li class="list-inline-item">
-                <i class="far fa-building"></i> <span>Hafner Pvt Ltd.</span>
+                <i class="far fa-building"></i> <span>{{user.email}}</span>
               </li>
-              <li class="list-inline-item">
-                <i class="fas fa-map-marker-alt"></i> West Virginia, US
-              </li>
+              
               <li class="list-inline-item">
                 <i class="far fa-calendar-alt"></i>
-                <span>Joined November 2017</span>
+                <span>{{user.telephone}}</span>
               </li>
             </ul>
           </div>
@@ -99,8 +97,8 @@
                 <div class="card-header">
                   <h5 class="card-title d-flex justify-content-between">
                     <span>Profil</span>
-                    <a class="btn btn-sm btn-white" RouterLink="/edit-profile"
-                      >Modifier</a
+                    <a class="btn btn-sm btn-white"
+                      > <a  routerLink="/home/edit-profile"> Modifier</a> </a
                     >
                   </h5>
                 </div>
@@ -109,8 +107,8 @@
                     <li class="py-0">
                       <h6>A Propos</h6>
                     </li>
-                    <li>Charles Hafner</li>
-                    <li>Hafner Pvt Ltd.</li>
+                    <li>{{user.firstName}}</li>
+                    <li>{{user.lastName}}</li>
                     <li class="pt-2 pb-0">
                       <h6>Contacts</h6>
                     </li>
@@ -119,18 +117,15 @@
                         href="/cdn-cgi/l/email-protection"
                         class="__cf_email__"
                         data-cfemail="bad9d2dbc8d6dfc9d2dbdcd4dfc8fadfc2dbd7cad6df94d9d5d7"
-                        >[email&#160;protected]</a
+                        ></a
                       >
                     </li>
-                    <li>+1 (304) 499-13-66</li>
+                    <li>{{user.telephone}}</li>
                     <li class="pt-2 pb-0">
-                      <h6>Address</h6>
+                      <h6>Addresse</h6>
                     </li>
                     <li>
-                      4663 Agriculture Lane,<br />
-                      Miami,<br />
-                      Florida - 33165,<br />
-                      United States.
+                     Lomé-TOGO
                     </li>
                   </ul>
                 </div>
@@ -144,73 +139,13 @@
                 <div class="card-body card-body-height">
                   <ul class="activity-feed">
                     <li class="feed-item">
-                      <div class="feed-date">Nov 16</div>
+                      <div class="feed-text">{{user.username}}</div>
                       <span class="feed-text"
-                        ><a href="profile.html">Brian Johnson</a> has paid
-                        the invoice
+                        ><a href="profile.html">Actif</a> 
                         <a href="invoice-details.html">"#DF65485"</a></span
                       >
                     </li>
-                    <li class="feed-item">
-                      <div class="feed-date">Nov 7</div>
-                      <span class="feed-text"
-                        ><a href="profile.html">Marie Canales</a> has
-                        accepted your estimate
-                        <a href="view-estimate.html">#GTR458789</a></span
-                      >
-                    </li>
-                    <li class="feed-item">
-                      <div class="feed-date">Oct 24</div>
-                      <span class="feed-text"
-                        >New expenses added
-                        <a href="expenses.html">"#TR018756</a></span
-                      >
-                    </li>
-                    <li class="feed-item">
-                      <div class="feed-date">Oct 24</div>
-                      <span class="feed-text"
-                        >New expenses added
-                        <a href="expenses.html">"#TR018756</a></span
-                      >
-                    </li>
-                    <li class="feed-item">
-                      <div class="feed-date">Oct 24</div>
-                      <span class="feed-text"
-                        >New expenses added
-                        <a href="expenses.html">"#TR018756</a></span
-                      >
-                    </li>
-                    <li class="feed-item">
-                      <div class="feed-date">Oct 24</div>
-                      <span class="feed-text"
-                        >New expenses added
-                        <a href="expenses.html">"#TR018756</a></span
-                      >
-                    </li>
-                    <li class="feed-item">
-                      <div class="feed-date">Oct 24</div>
-                      <span class="feed-text"
-                        >New expenses added
-                        <a href="expenses.html">"#TR018756</a></span
-                      >
-                    </li>
-                    <li class="feed-item">
-                      <div class="feed-date">Jan 27</div>
-                      <span class="feed-text"
-                        ><a href="profile.html">Robert Martin</a> gave a
-                        review for
-                        <a href="product-details.html"
-                          >"Dell Laptop"</a
-                        ></span
-                      >
-                    </li>
-                    <li class="feed-item">
-                      <div class="feed-date">Jan 14</div>
-                      <span class="feed-text"
-                        >New customer registered
-                        <a href="profile.html">"Tori Carter"</a></span
-                      >
-                    </li>
+                   
                   </ul>
                 </div>
               </div>

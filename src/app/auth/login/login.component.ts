@@ -24,15 +24,18 @@ export class LoginComponent {
 
   login() {
     this.errorMsg = [];
-    this.authService.login({body:this.authRequest}).subscribe({
+    this.authService.loginuser(this.authRequest).subscribe({
       next: (res) => {
-        
-        this.tokenService.token = res.token as string;
-        this.router.navigate(['/home/dashboard']);
+        console.log('Response from API:', res);  // Log la réponse pour vérifier la structure
+        if (res.token) {
+          console.log('Token received:', res.token);
+          this.tokenService.token = res.token as string;
+          this.router.navigate(['/home/dashboard']);
+        } else {
+          this.errorMsg.push('Token is missing in the response');
+        }
       },
       error: (err) => {
-        console.log(this.authRequest);
-        
         if (err.error.validationErrors) {
           this.errorMsg = err.error.validationErrors;
         } else {
@@ -40,10 +43,6 @@ export class LoginComponent {
         }
       }
     });
-  }
-
-  register() {
-    this.router.navigate(['register']);
   }
 
 }

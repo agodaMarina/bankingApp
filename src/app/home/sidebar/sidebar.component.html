@@ -13,19 +13,19 @@
           <a routerLink="factures"
             ><i class="fe fe-file"></i> <span>Factures</span></a
           >
-        </li>
-        <li class="menu-title"><span>Journaux</span></li>
-        <li>
+         </li>
+         <li>
           <a routerLink="images"
             ><i class="fe fe-file-text"></i> <span>Images</span></a
           >
         </li>
+        <li class="menu-title"><span>Journaux</span></li>
         <li>
           <a routerLink="comptes"
             ><i class="fe fe-edit"></i> <span>Crédit/débit</span></a
           >
         </li>
-        <li class="menu-title"><span>Raports</span></li>
+        <li class="menu-title"> <span> Raports </span> </li>
 
         <li class="submenu">
           <a routerLink="rapports"
@@ -38,18 +38,18 @@
         <li class="menu-title"><span>Utilisateurs</span></li>
         <li>
           <a routerLink="listUsers"
-            ><i class="fe fe-user"></i> <span>Users</span></a
+            ><i class="fe fe-user"></i> <span>Utilisateurs</span></a
           >
         </li>
 
         <li class="menu-title"><span>Réglages</span></li>
         <li>
-          <a routerLink="settings"
+          <a routerLink="edit-profile"
             ><i class="fe fe-settings"></i> <span>Réglages</span></a
           >
         </li>
         <li>
-          <a routerLink=""><i class="fe fe-power"></i> <span>Déconexion</span></a>
+          <a (click)="logout()"><i class="fe fe-power"></i> <span>Déconexion</span></a>
         </li>
       </ul>
     </div>

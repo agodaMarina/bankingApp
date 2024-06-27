@@ -10,13 +10,13 @@
       <div class="row">
         <div class="col-xl-5 d-flex">
           <div class="dash-user-card w-100">
-            <h4><i class="fe fe-sun"></i>Bienvenue</h4>
+            <h4><i class="fe fe-sun"></i>Bienvenue, {{user.firstName}} </h4>
             
             <div class="dash-btns">
-              <a routerLink="factures" class="btn view-company-btn"
+              <a routerLink="/home/factures" class="btn view-company-btn"
                 >Voir les factures</a
               >
-              <a routerLink="comptes" class="btn view-package-btn"
+              <a routerLink="/home/comptes" class="btn view-package-btn"
                 >Voir les comptes</a
               >
             </div>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="dash-comapny-info">
                   <h6>Total Montant</h6>
-                  <h5>0</h5>
+                  <h5>{{total}}</h5>
                   <p>
                     <span>14% <i class="fe fe-chevrons-up"></i></span>
                   </p>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="dash-comapny-info">
                   <h6>Total Utilisateurs</h6>
-                  <h5>1</h5>
+                  <h5>{{totalUsers}}</h5>
                   <p>
                     <span>1% <i class="fe fe-chevrons-up"></i></span>
                   </p>

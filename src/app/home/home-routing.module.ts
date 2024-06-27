@@ -21,7 +21,7 @@ const routes: Routes = [
 
       {path:'listUsers', component:UserlistComponent},
       {path:'factures',component:FactureComponent},
-      {path:'settings',component:SettingsComponent},
+      // {path:'settings',component:SettingsComponent},
       
       {path:'images',component:FileComponent},
       {path:'comptes',component:CompteComponent},

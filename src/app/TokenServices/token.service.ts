@@ -43,4 +43,8 @@ export class TokenService {
     }
     return [];
   }
+
+  logout() {
+    localStorage.removeItem('token');
+  }
 }

@@ -12,16 +12,21 @@ export class ProfileComponent {
 constructor(private authenticationControllerService: AuthenticationControllerService) { }
 
   userUpdate: UpdateProfilRequest= { email: '', firstName: '', lastName: '', telephone: ''};
-  user!: User;
+  user:User={};
 
   ngOnInit() {
     this.getProfile();
   }
 
-  getProfile() {
-    this.authenticationControllerService.getProfile().subscribe((data: User) => {
+  getProfile():User {
+    
+    this.authenticationControllerService.getProfileuser().subscribe((data: User) => {
+      console.log(data);
       this.user = data;
+
     });
+    return this.user;
+    
   }
 
   updateProfile() {
