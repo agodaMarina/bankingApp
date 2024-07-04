@@ -49,6 +49,10 @@ export class ImageControllerService extends BaseService {
     );
   }
 
+  getImages(): Observable<any> {
+    return this.http.get(this.rootUrl+'/images/all');
+  }
+
   uplaodImage(formData: FormData): Observable<any> {
     return this.http.post(this.rootUrl+'/images/saveImage', formData);
   }

@@ -102,4 +102,13 @@ export class FactureControllerService extends BaseService {
     );
   }
 
+  exportFacturesToExcel(): Observable<Blob> {
+    return this.http.get(`${this.rootUrl}/facture/export/excel`, { responseType: 'blob' });
+  }
+
+  getCompte(): Observable<any> {
+    return this.http.get<any>(this.rootUrl + '/comptes/getcompte');
+  }
+  
+
 }

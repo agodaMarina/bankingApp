@@ -18,11 +18,11 @@ import { HttpTokenInterceptor } from './interceptor/http-token.interceptor';
   ],
   providers: [
     HttpClient,
-    {
-      provide:HTTP_INTERCEPTORS,
-      useClass:HttpTokenInterceptor,
-      multi:true
-    }
+    // {
+    //   provide:HTTP_INTERCEPTORS,
+    //   useClass:HttpTokenInterceptor,
+    //   multi:true
+    // }
   
   ],
   bootstrap: [AppComponent]

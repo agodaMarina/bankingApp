@@ -81,11 +81,9 @@ constructor(private service:AdminService) { }
   }
 
 
-  getOneUser(id:number): User {
-    if (id === undefined) {
-      return {}; // or handle the case when id is undefined
-    }
-    
+  getOneUser(id:number) {
+    if (id !== undefined) {
+      
     this.service.getOneUser(id).subscribe(
       (value:User)=>{
         this.user=value;
@@ -95,9 +93,11 @@ constructor(private service:AdminService) { }
       },
       ()=>{}
     );
-    return this.user;
+    
+  }else {
+    console.error('ID is undefined!');
   }
 
-
+}
 
 }

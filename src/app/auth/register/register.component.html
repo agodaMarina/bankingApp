@@ -15,47 +15,79 @@
         <div class="login-right-wrap">
           <h1>Inscription</h1>
           <p class="account-subtitle">Accedez au Tableau de bord</p>
+          <!--
           <div class="alert alert-danger" role="alert" *ngIf="errorMsg.length">
-            <p *ngFor="let msg of errorMsg">{{msg}}</p>
+            <p *ngFor="let msg of errorMsg">{{ msg }}</p>
           </div>
+          -->
           <form #f="ngForm" (submit)="register()">
             <div class="input-block mb-3">
               <label class="form-control-label">Nom</label>
-              <input [(ngModel)]="registerRequest.lastName" name="registerRequest.lastname" class="form-control" type="text"  id="validationCustom03" />
+              <input
+                [(ngModel)]="registerRequest.lastName"
+                name="registerRequest.lastname"
+                class="form-control"
+                type="text"
+                id="validationCustom03"
+              />
               <div class="invalid-feedback">
                 veuillez entrer une valeur valide
-               </div>
+              </div>
             </div>
             <div class="input-block mb-3">
               <label class="form-control-label">Prenom(s)</label>
-              <input [(ngModel)]="registerRequest.firstName" name="registerRequest.firstname" class="form-control" type="text"  id="validationCustom03" />
+              <input
+                [(ngModel)]="registerRequest.firstName"
+                name="registerRequest.firstname"
+                class="form-control"
+                type="text"
+                id="validationCustom03"
+              />
               <div class="invalid-feedback">
                 veuillez entrer une valeur valide
-               </div>
+              </div>
             </div>
             <div class="input-block mb-3">
               <label class="form-control-label">Email </label>
-              <input [(ngModel)]="registerRequest.email" name="registerRequest.email" class="form-control" type="email"  id="validationCustom03" />
+              <input
+                [(ngModel)]="registerRequest.email"
+                name="registerRequest.email"
+                class="form-control"
+                type="email"
+                id="validationCustom03"
+              />
               <div class="invalid-feedback">
                 veuillez entrer une valeur valide
-               </div>
+              </div>
             </div>
-            <div class="input-block mb-3" >
-              <label class="form-control-label" >Password</label>
-              <input [(ngModel)]="registerRequest.password" name="registerRequest.password" class="form-control" type="password"  id="validationCustom03" />
+            <div class="input-block mb-3">
+              <label class="form-control-label">Password</label>
+              <input
+                [(ngModel)]="registerRequest.password"
+                name="registerRequest.password"
+                class="form-control"
+                type="password"
+                id="validationCustom03"
+              />
               <div class="invalid-feedback">
                 veuillez entrer une valeur valide
-               </div>
+              </div>
             </div>
             <div class="input-block mb-3">
               <label class="form-control-label">Confirm Password</label>
               <input class="form-control" type="password" />
             </div>
-            <div class="input-block mb-3" >
+            <div class="input-block mb-3">
               <label class="form-control-label">telephone</label>
-              <input [(ngModel)]="registerRequest.telephone" name="registerRequest.telephone" class="form-control" type="text"id="validationCustom03" />
+              <input
+                [(ngModel)]="registerRequest.telephone"
+                name="registerRequest.telephone"
+                class="form-control"
+                type="text"
+                id="validationCustom03"
+              />
               <div class="invalid-feedback">
-               veuillez entrer une valeur valide
+                veuillez entrer une valeur valide
               </div>
             </div>
             <div class="mb-3">
@@ -71,9 +103,7 @@
                 <option value="comptable">Comptable</option>
                 <option value="client">Client</option>
               </select>
-              <div class="invalid-feedback">
-                veuillez choisir une option
-              </div>
+              <div class="invalid-feedback">veuillez choisir une option</div>
             </div>
 
             <div class="input-block mb-0">
@@ -90,8 +120,7 @@
 
           <div class="social-login">
             <span>Inscription par </span>
-            <a href="#" class="facebook"
-              ><i class="fab fa-facebook-f"></i></a
+            <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a
             ><a href="#" class="google"><i class="fab fa-google"></i></a>
           </div>
 

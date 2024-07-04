@@ -78,8 +78,8 @@
                       class="badge bg-success-light">Actif</span>
                     </td>
 
-                    <td>
-                      <div class="status-toggle">
+                    <td>  <!--
+                       <div class="status-toggle">
                         <input
                           id="rating_{{u.id}}"
                           class="check"
@@ -88,7 +88,14 @@
                           (click)="confirmActivation(u)"
                         />
                         <label for="rating_{{u.id}}" class="checktoggle checkbox-bg">checkbox</label>
-                      </div>
+                      </div>-->
+                      <a
+                      (click)="confirmActivation(u)"
+                      id="alert-confirm"
+                      class="btn btn-primary waves-effect waves-light"
+                      >Désactiver</a
+                    >
+                    
                     </td>
                     <td class="d-flex align-items-center">
                       <div class="dropdown dropdown-action">
@@ -107,7 +114,7 @@
                                 href="javascript:void(0);"
                                 data-bs-toggle="modal"
                                 data-bs-target="#edit_user"
-                                (click)="getOneUser(u.id)"
+                                (click)="getOneUser(u.id!)"
                                 ><i class="far fa-eye me-2"></i>voir</a
                               >
                             </li>
@@ -447,13 +454,7 @@
             >
               Cancel
             </button>
-            <button
-              type="submit"
-              data-bs-dismiss="modal"
-              class="btn btn-primary paid-continue-btn"
-            >
-              Update
-            </button>
+           
           </div>
         </form>
       </div>

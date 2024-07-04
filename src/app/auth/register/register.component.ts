@@ -11,7 +11,7 @@ AuthenticationControllerService
 })
 export class RegisterComponent {
   registerRequest: RegistrationRequest = {email: '', firstName: '', lastName: '', password: '', role: '', telephone: ''};
-  errorMsg: Array<string> = [];
+  // errorMsg: Array<string> = [];
 
   constructor(
     private router: Router,
@@ -24,7 +24,7 @@ export class RegisterComponent {
   }
 
   register() {
-    this.errorMsg = [];
+    // this.errorMsg = [];
     this.authService.register({
       body: this.registerRequest
     })
@@ -33,7 +33,7 @@ export class RegisterComponent {
           this.router.navigate(['/auth/active-account']);
         },
         error: (err) => {
-          this.errorMsg = err.error.validationErrors;
+          // this.errorMsg = err.error.validationErrors;
         }
       });
   }

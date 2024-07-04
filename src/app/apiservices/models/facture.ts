@@ -1,4 +1,7 @@
 /* tslint:disable */
+
+import { User } from "./user";
+
 /* eslint-disable */
 export interface Facture {
   date?: string;
@@ -7,4 +10,6 @@ export interface Facture {
   totalttc?: number;
   totaltva?: number;
   tva?: number;
+  user?: User;
+  compte?: string;
 }

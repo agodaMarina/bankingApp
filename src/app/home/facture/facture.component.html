@@ -5,28 +5,11 @@
         <h5>Factures</h5>
         <div class="list-btn">
           <ul class="filter-list">
+            
             <li>
-              <a
-                class="btn btn-filters w-auto popup-toggle"
-                data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
-                title="Filter"
-                ><span class="me-2"
-                  ><img
-                    src="assets/img/icons/filter-icon.svg"
-                    alt="filter" /></span
-                >Filtrer
-              </a>
-            </li>
-            <li>
-              <a
-                class="btn-filters"
-                href="javascript:void(0);"
-                data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
-                title="Settings"
-                ><span><i class="fe fe-settings"></i></span>
-              </a>
+              <a class="btn btn-import" (click)="downloadExcel()"
+                ><span><i class="fe fe-check-square me-2"></i>Excel</span></a
+              >
             </li>
             <li>
               <a
@@ -44,7 +27,7 @@
       </div>
     </div>
 
-    <div id="filter_inputs" class="card filter-card">
+  <!-- <div id="filter_inputs" class="card filter-card">
       <div class="card-body pb-0">
         <div class="row">
           <div class="col-sm-6 col-md-3">
@@ -68,7 +51,7 @@
         </div>
       </div>
     </div>
-
+--> 
     <div class="row">
       <div class="col-xl-2 col-lg-4 col-sm-6 col-12 d-flex">
         <div class="card inovices-card w-100">
@@ -244,37 +227,28 @@
               <table class="table table-stripped table-hover datatable">
                 <thead class="thead-light">
                   <tr>
-                    <th>
-                      #
-                    </th>
+                    <th>#</th>
                     <th>Numero</th>
-                    <th>Client</th>
                     <th>Tva</th>
                     <th>Payé</th>
-                    <th>Mode de Payement</th>
                     <th>Montant</th>
-                    <th>Date</th>
+                    <th>Créé le</th>
+                    <th>Créé Par</th>
                     <th>Statut</th>
                     <th class="text-end">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  
-                  <ng-container *ngFor="let item of factures ">
-
+                  <ng-container *ngFor="let item of factures">
                     <tr>
-                      <td>
-                       #
-                      </td>
-                      <td>{{item.numero}} </td>
-                      <td>N/A</td>
-                      <td>{{item.tva}}</td>
+                      <td># </td>
+                      <td>{{ item.numero }}</td>
+                      <td>{{ item.tva }}</td>
                       <td>oui</td>
-                      <td>N/A</td>
-                      <td>{{item.totalttc}}</td>
-                      <td>-</td>
+                      <td>{{ item.totalttc }}</td>
+                      <td>{{ item.date | date:'dd/MM/yyyy HH:mm'}}</td>
+                      <td>{{ item.user?.email}}</td>
                       <td><span class="badge bg-success-light">Payé</span></td>
-  
                       <td class="text-end">
                         <div class="dropdown dropdown-action">
                           <a
@@ -287,18 +261,19 @@
                           <div
                             class="dropdown-menu dropdown-menu-end customer-dropdown"
                           >
-                            <a class="dropdown-item" 
+                            <a
+                              class="dropdown-item"
                               href="javascript:void(0);"
                               data-bs-toggle="modal"
                               data-bs-target="#edit_user"
                               [attr.data-id]="item.id ? item.id : null"
                               ><i class="far fa-edit me-2"></i>modifer</a
                             >
-                            <a 
-                            class="dropdown-item" href="javascript:void(0);" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#view_invoice"
-                            
+                            <a
+                              class="dropdown-item"
+                              href="javascript:void(0);"
+                              data-bs-toggle="modal"
+                              data-bs-target="#view_invoice"
                               ><i class="far fa-eye me-2"></i>voir</a
                             >
                             <a
@@ -310,21 +285,18 @@
                               (click)="setFactureIdToDelete(item.id)"
                               ><i class="far fa-trash-alt me-2"></i>supprimer
                             </a>
-                        <!--    <a class="dropdown-item" 
+                            <!--    <a class="dropdown-item" 
                             href="javascript:void(0);"
                               ><i class="fe fe-send me-2"></i>Envoyé</a
                             >
                             <a class="dropdown-item" href="javascript:void(0);"
                               ><i class="fe fe-download me-2"></i>telecharger</a
-                            >--> 
+                            >-->
                           </div>
                         </div>
                       </td>
                     </tr>
                   </ng-container>
-
-                  
-               
                 </tbody>
               </table>
             </div>
@@ -334,7 +306,7 @@
     </div>
   </div>
 </div>
-<div class="modal custom-modal modal-lg fade" id="add_user" role="dialog">
+<!--<div class="modal custom-modal modal-lg fade" id="add_user" role="dialog">
   <div class="modal-dialog modal-dialog-centered modal-md">
     <div class="modal-content">
       <div class="modal-header border-0 pb-0">
@@ -395,8 +367,6 @@
                           type="number"
                           class="form-control"
                           formControlName="totaltva"
-                        
-                          
                         />
                       </div>
                     </div>
@@ -407,18 +377,15 @@
                           type="text"
                           class="form-control"
                           formControlName="totalttc"
-                          
-                         
                         />
                       </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12">
                       <div class="input-block">
-                        <label>Statut</label>
-                        <select class="select">
-                          <option>Selectionner un Statut</option>
-                          <option >Actif</option>
-                          <option>Archivé</option>
+                        <label>Compte</label>
+                        <select formControlName="compte" class="form-control">
+                          <option>Veuillez choisir un compte</option>
+                          <option *ngFor="let item of comptes" value="item.description">{{item.description}}</option>
                         </select>
                       </div>
                     </div>
@@ -447,8 +414,134 @@
       </form>
     </div>
   </div>
-  
+</div> -->
+
+<div class="modal custom-modal modal-lg fade" id="add_user" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <div class="form-header modal-header-title text-start mb-0">
+          <h4 class="mb-0">Ajouter une Facture</h4>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="factureForm" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+          <div class="row">
+            <!-- Column for image upload -->
+            <div class="col-lg-6 col-md-12">
+              <div *ngIf="!imagePreview" class="image-upload">
+                <label>
+                  Upload (10MB max)
+                  <a
+                    href="javascript:void(0)"
+                    class="custom-file-container__image-clear"
+                    title="Clear Image"
+                    (click)="clearImage()"
+                  ></a>
+                </label>
+                <label class="custom-file-container__custom-file">
+                  <input
+                    type="file"
+                    class="custom-file-container__custom-file__custom-file-input"
+                    accept="image/*"
+                    (change)="onFileSelected($event)"
+                  />
+                  <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                  <span class="custom-file-container__custom-file__custom-file-control"></span>
+                </label>
+              </div>
+              
+                <img *ngIf="imagePreview" [src]="imagePreview" alt="Image Preview" class="img-thumbnail mt-2" />
+                <button *ngIf="imagePreview" (click)="loadImage()" class="btn btn-primary mt-3">Upload</button>
+                <button *ngIf="imagePreview" (click)="clearImage()" class="btn btn-secondary mt-3">Retour</button>
+              
+            </div>
+            <!-- Column for form fields -->
+            <div class="col-lg-6 col-md-12" *ngIf="imagePreview">
+              <div class="form-groups-item">
+                <div class="input-block mb-3">
+                  <label>Fournisseur</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    
+                    placeholder="Entez le Numéro de la facture"
+                  />
+                </div>
+                <div class="input-block mb-3">
+                  <label>Numéro</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="numero"
+                    placeholder="Entez le Numéro de la facture"
+                  />
+                </div>
+                <div class="input-block mb-3">
+                  <label>TVA</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="tva"
+                    placeholder="Entez la TVA appliquée (%)"
+                  />
+                </div>
+                <div class="input-block mb-3">
+                  <label>TOTAL HT</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="totalht"
+                    placeholder="Entez le  Montant Hors Taxe"
+                  />
+                </div>
+                <div class="input-block mb-3">
+                  <label>Total TVA</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="totaltva"
+                  />
+                </div>
+                <div class="input-block mb-3">
+                  <label>Total TTC</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="totalttc"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            data-bs-dismiss="modal"
+            class="btn btn-back cancel-btn me-2"
+          >
+            Annuler
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary paid-continue-btn"
+          >
+            Ajouter
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
+
+
 <div class="modal custom-modal modal-lg fade" id="edit_user" role="dialog">
   <div class="modal-dialog modal-dialog-centered modal-md">
     <div class="modal-content">
@@ -570,7 +663,10 @@
         <div class="modal-btn delete-action">
           <div class="row">
             <div class="col-6">
-              <a href="javascript:void(0);" class="btn btn-primary paid-continue-btn"(click)="deleteFacture()"
+              <a
+                href="javascript:void(0);"
+                class="btn btn-primary paid-continue-btn"
+                (click)="deleteFacture()"
                 >Supprimer</a
               >
             </div>

@@ -25,10 +25,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/file-upload-with-preview/dist/style.css"
             ],
             "scripts": [
-              "src/assets/plugins/alertify/alertify.min.js"
+              "src/assets/plugins/alertify/alertify.min.js",
+              "node_modules/file-upload-with-preview/dist/file-upload-with-preview.js"
             ]
           },
           "configurations": {

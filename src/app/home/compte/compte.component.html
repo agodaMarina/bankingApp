@@ -1,1 +1,24 @@
-<p>compte works!</p>
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <div class="page-header">
+      <div class="content-page-header">
+        <h5>Comptes</h5>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-4 d-flex" *ngFor="let item of comptes">
+        <div class="card flex-fill bg-white">
+          <div class="card-header">
+            <h5 class="card-title mb-0">{{item.code}}</h5>
+          </div>
+          <div class="card-body card-buttons">
+            <p class="card-text">
+             {{item.description}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,7 +12,9 @@
           <div class="card-header">
             <h5 class="card-title">Chargez vos images </h5>
           </div>
+          <!--data-upload-id="mySecondImage"-->
           <div class="card-body">
+            
             <div class="custom-file-container" data-upload-id="myFirstImage">
               <label>
                 Upload (10MB max)
@@ -40,6 +42,17 @@
               <button *ngIf="imagePreview" (click)="loadImage()" class="btn btn-primary mt-3">Upload</button>
               <button *ngIf="imagePreview" (click)="clearImage()" class="btn btn-secondary mt-3">Cancel</button>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 d-flex" *ngFor="let image of images">
+        <div class="card flex-fill bg-white">
+        <!-- <img [src]="'data:' + image.type + ';base64,' + image.imageData" [alt]="image.name" class="card-img-top"/>--> 
+         <img [src]="'data:/image/png;base64,'+image.imageData" alt="Card Image"/>
+          <div class="card-header">
+            <h5 class="card-title mb-0">{{ image.name }}</h5>
+          </div>
+          <div class="card-body card-buttons">
           </div>
         </div>
       </div>
