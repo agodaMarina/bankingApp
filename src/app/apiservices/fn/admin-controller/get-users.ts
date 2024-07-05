@@ -6,13 +6,13 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { Facture } from '../../models/facture';
+import { User } from '../../models/user';
 
-export interface GetFacture$Params {
+export interface GetUsers$Params {
 }
 
-export function getFacture(http: HttpClient, rootUrl: string, params?: GetFacture$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Facture>>> {
-  const rb = new RequestBuilder(rootUrl, getFacture.PATH, 'get');
+export function getUsers(http: HttpClient, rootUrl: string, params?: GetUsers$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<User>>> {
+  const rb = new RequestBuilder(rootUrl, getUsers.PATH, 'get');
   if (params) {
   }
 
@@ -21,9 +21,9 @@ export function getFacture(http: HttpClient, rootUrl: string, params?: GetFactur
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<Facture>>;
+      return r as StrictHttpResponse<Array<User>>;
     })
   );
 }
 
-getFacture.PATH = '/facture/getFacture';
+getUsers.PATH = '/admin/utilisateurs';

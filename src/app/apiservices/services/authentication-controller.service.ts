@@ -9,8 +9,8 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { activeAccount } from '../fn/authentication-controller/active-account';
-import { ActiveAccount$Params } from '../fn/authentication-controller/active-account';
+import { activeAccount1 } from '../fn/authentication-controller/active-account-1';
+import { ActiveAccount1$Params } from '../fn/authentication-controller/active-account-1';
 import { AuthenticationResponse } from '../models/authentication-response';
 import { changePassword } from '../fn/authentication-controller/change-password';
 import { ChangePassword$Params } from '../fn/authentication-controller/change-password';
@@ -18,6 +18,8 @@ import { getProfile } from '../fn/authentication-controller/get-profile';
 import { GetProfile$Params } from '../fn/authentication-controller/get-profile';
 import { login } from '../fn/authentication-controller/login';
 import { Login$Params } from '../fn/authentication-controller/login';
+import { logout } from '../fn/authentication-controller/logout';
+import { Logout$Params } from '../fn/authentication-controller/logout';
 import { register } from '../fn/authentication-controller/register';
 import { Register$Params } from '../fn/authentication-controller/register';
 import { updateProfile } from '../fn/authentication-controller/update-profile';
@@ -27,7 +29,6 @@ import { AuthenticateRequest } from '../models/authenticate-request';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationControllerService extends BaseService {
-  
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
@@ -86,10 +87,6 @@ export class AuthenticationControllerService extends BaseService {
     );
   }
 
-  logout(): Observable<void> {
-    return this.http.post<void>(`${this.rootUrl}/auth/logout`, {});
-  }
-
   /** Path part for operation `login()` */
   static readonly LoginPath = '/auth/login';
 
@@ -114,7 +111,6 @@ export class AuthenticationControllerService extends BaseService {
       map((r: StrictHttpResponse<AuthenticationResponse>): AuthenticationResponse => r.body)
     );
   }
-
 
   loginuser(authRequest: AuthenticateRequest): Observable<AuthenticationResponse> {
     return this.http.post<AuthenticationResponse>(`${this.rootUrl}/auth/login`, authRequest, {
@@ -149,9 +145,6 @@ export class AuthenticationControllerService extends BaseService {
     );
   }
 
-  getAll(): Observable<Array<User>> {
-    throw new Error('Method not implemented.');
-  }
   /** Path part for operation `getProfile()` */
   static readonly GetProfilePath = '/auth/profile';
 
@@ -176,34 +169,69 @@ export class AuthenticationControllerService extends BaseService {
       map((r: StrictHttpResponse<User>): User => r.body)
     );
   }
+
+  /** Path part for operation `logout()` */
+  static readonly LogoutPath = '/auth/logout';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `logout()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  logout$Response(params?: Logout$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+    return logout(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `logout$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  logout(params?: Logout$Params, context?: HttpContext): Observable<string> {
+    return this.logout$Response(params, context).pipe(
+      map((r: StrictHttpResponse<string>): string => r.body)
+    );
+  }
+
+  /** Path part for operation `activeAccount1()` */
+  static readonly ActiveAccount1Path = '/auth/activate_account';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `activeAccount1()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  activeAccount1$Response(params: ActiveAccount1$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return activeAccount1(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `activeAccount1$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  activeAccount1(params: ActiveAccount1$Params, context?: HttpContext): Observable<void> {
+    return this.activeAccount1$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
+    );
+  }
+
   getProfileuser():Observable<User>{
     return this.http.get<User>(`${this.rootUrl}/auth/profile`)
 
   }
 
-  /** Path part for operation `activeAccount()` */
-  static readonly ActiveAccountPath = '/auth/activate_account';
 
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `activeAccount()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  activeAccount$Response(params: ActiveAccount$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return activeAccount(this.http, this.rootUrl, params, context);
+  activeaccount( token: string): Observable<void> {
+    return this.http.get<void>(`${this.rootUrl}/auth/activate_account?token=${token}`, {
+      observe: 'body',  // Option pour observer le corps de la réponse
+      responseType: 'json'  // Option pour s'assurer que la réponse est interprétée comme JSON
+    });
   }
 
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `activeAccount$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  activeAccount(params: ActiveAccount$Params, context?: HttpContext): Observable<void> {
-    return this.activeAccount$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
-    );
-  }
 
 }

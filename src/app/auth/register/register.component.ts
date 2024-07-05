@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegistrationRequest } from 'src/app/apiservices/models';
 import { AuthenticationControllerService } from 'src/app/apiservices/services';
-AuthenticationControllerService
+
 
 @Component({
   selector: 'app-register',
@@ -13,11 +13,7 @@ export class RegisterComponent {
   registerRequest: RegistrationRequest = {email: '', firstName: '', lastName: '', password: '', role: '', telephone: ''};
   // errorMsg: Array<string> = [];
 
-  constructor(
-    private router: Router,
-    private authService: AuthenticationControllerService
-  ) {
-  }
+  constructor(private authService: AuthenticationControllerService, private router: Router) { }
 
   login() {
     this.router.navigate(['/home/login']);

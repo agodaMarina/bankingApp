@@ -11,40 +11,17 @@
         }
     ],
     "paths": {
-        "/rapport/updateRapport": {
+        "/vente/update": {
             "put": {
                 "tags": [
-                    "rapport-controller"
+                    "vente-controller"
                 ],
-                "operationId": "updateRapport",
+                "operationId": "updateVente",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Rapport"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
-        "/rapport/save": {
-            "post": {
-                "tags": [
-                    "rapport-controller"
-                ],
-                "operationId": "generateRapport",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Rapport"
+                                "$ref": "#/components/schemas/Vente"
                             }
                         }
                     },
@@ -56,7 +33,79 @@
                         "content": {
                             "*/*": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Rapport"
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/achat/update": {
+            "put": {
+                "tags": [
+                    "achat-controller"
+                ],
+                "operationId": "updateAchat",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Achat"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vente/validate": {
+            "post": {
+                "tags": [
+                    "vente-controller"
+                ],
+                "operationId": "saveVente",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "file",
+                                    "vente"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "vente": {
+                                        "$ref": "#/components/schemas/Vente"
+                                    },
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object"
                                 }
                             }
                         }
@@ -98,29 +147,6 @@
                                 }
                             }
                         }
-                    }
-                }
-            }
-        },
-        "/facture/addFacture": {
-            "post": {
-                "tags": [
-                    "facture-controller"
-                ],
-                "operationId": "ajoutFactureManuelle",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Facture"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK"
                     }
                 }
             }
@@ -245,20 +271,20 @@
                 }
             }
         },
-        "/rapport/getRapport/{date}": {
-            "get": {
+        "/admin/unlock/{id}": {
+            "post": {
                 "tags": [
-                    "rapport-controller"
+                    "admin-controller"
                 ],
-                "operationId": "getRapport",
+                "operationId": "activeAccount",
                 "parameters": [
                     {
-                        "name": "date",
+                        "name": "id",
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string",
-                            "format": "date"
+                            "type": "integer",
+                            "format": "int64"
                         }
                     }
                 ],
@@ -268,7 +294,7 @@
                         "content": {
                             "*/*": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Rapport"
+                                    "type": "string"
                                 }
                             }
                         }
@@ -276,58 +302,20 @@
                 }
             }
         },
-        "/rapport/getAllReports": {
-            "get": {
+        "/admin/blockUser/{id}": {
+            "post": {
                 "tags": [
-                    "rapport-controller"
+                    "admin-controller"
                 ],
-                "operationId": "getAllRapport",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Rapport"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/rapport/generate-report": {
-            "get": {
-                "tags": [
-                    "rapport-controller"
-                ],
-                "operationId": "generateReport",
+                "operationId": "desactiveAccount",
                 "parameters": [
                     {
-                        "name": "startDate",
-                        "in": "query",
+                        "name": "id",
+                        "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "endDate",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "username",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
+                            "type": "integer",
+                            "format": "int64"
                         }
                     }
                 ],
@@ -337,11 +325,100 @@
                         "content": {
                             "*/*": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/achat/add": {
+            "post": {
+                "tags": [
+                    "achat-controller"
+                ],
+                "operationId": "addAchat",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "achat",
+                                    "file"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "achat": {
+                                        "$ref": "#/components/schemas/Achat"
+                                    },
+                                    "file": {
                                         "type": "string",
-                                        "format": "byte"
+                                        "format": "binary"
                                     }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Achat"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vente/get/{id}": {
+            "get": {
+                "tags": [
+                    "vente-controller"
+                ],
+                "operationId": "getVenteById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vente/all": {
+            "get": {
+                "tags": [
+                    "vente-controller"
+                ],
+                "operationId": "getAllVentes",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object"
                                 }
                             }
                         }
@@ -379,12 +456,12 @@
                 }
             }
         },
-        "/facture/getFacture": {
+        "/images/all": {
             "get": {
                 "tags": [
-                    "facture-controller"
+                    "image-controller"
                 ],
-                "operationId": "getFacture",
+                "operationId": "getAllImages",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -393,11 +470,24 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Facture"
+                                        "type": "object"
                                     }
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/comptes/getcompte": {
+            "get": {
+                "tags": [
+                    "compte-controller"
+                ],
+                "operationId": "exportComptes",
+                "responses": {
+                    "200": {
+                        "description": "OK"
                     }
                 }
             }
@@ -422,12 +512,32 @@
                 }
             }
         },
+        "/auth/logout": {
+            "get": {
+                "tags": [
+                    "authentication-controller"
+                ],
+                "operationId": "logout",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/auth/activate_account": {
             "get": {
                 "tags": [
                     "authentication-controller"
                 ],
-                "operationId": "activeAccount",
+                "operationId": "activeAccount_1",
                 "parameters": [
                     {
                         "name": "token",
@@ -445,36 +555,35 @@
                 }
             }
         },
-        "/rapport/deleteRapport/{id}": {
-            "delete": {
+        "/admin/utilisateurs": {
+            "get": {
                 "tags": [
-                    "rapport-controller"
+                    "admin-controller"
                 ],
-                "operationId": "deleteRapport",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32"
-                        }
-                    }
-                ],
+                "operationId": "getUsers",
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
         },
-        "/facture/deleteFacture/{id}": {
-            "delete": {
+        "/admin/utilisateur/{id}": {
+            "get": {
                 "tags": [
-                    "facture-controller"
+                    "admin-controller"
                 ],
-                "operationId": "deleteFacture",
+                "operationId": "getUser",
                 "parameters": [
                     {
                         "name": "id",
@@ -488,7 +597,127 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/achat/get/{id}": {
+            "get": {
+                "tags": [
+                    "achat-controller"
+                ],
+                "operationId": "getAchat",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/achat/all": {
+            "get": {
+                "tags": [
+                    "achat-controller"
+                ],
+                "operationId": "getAllAchats",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vente/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "vente-controller"
+                ],
+                "operationId": "deleteVente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/achat/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "achat-controller"
+                ],
+                "operationId": "deleteAchat",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -496,30 +725,106 @@
     },
     "components": {
         "schemas": {
-            "Rapport": {
+            "GrantedAuthority": {
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "titre": {
+                    "authority": {
                         "type": "string"
-                    },
-                    "date": {
-                        "type": "string",
-                        "format": "date-time"
                     }
                 }
             },
-            "Facture": {
+            "ImageData": {
                 "type": "object",
                 "properties": {
                     "id": {
                         "type": "integer",
-                        "format": "int32"
+                        "format": "int64"
                     },
-                    "date": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "imageData": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "byte"
+                        }
+                    }
+                }
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "telephone": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "role": {
+                        "type": "string",
+                        "enum": [
+                            "USER",
+                            "ADMIN",
+                            "MANAGER"
+                        ]
+                    },
+                    "accountLocked": {
+                        "type": "boolean"
+                    },
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "accountNonLocked": {
+                        "type": "boolean"
+                    },
+                    "credentialsNonExpired": {
+                        "type": "boolean"
+                    },
+                    "accountNonExpired": {
+                        "type": "boolean"
+                    },
+                    "authorities": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/GrantedAuthority"
+                        }
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Vente": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "client": {
+                        "type": "string"
+                    },
+                    "dateEmission": {
                         "type": "string",
                         "format": "date-time"
                     },
@@ -537,6 +842,59 @@
                     "totalttc": {
                         "type": "number",
                         "format": "double"
+                    },
+                    "statut": {
+                        "type": "boolean"
+                    },
+                    "image": {
+                        "$ref": "#/components/schemas/ImageData"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    }
+                }
+            },
+            "Achat": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "dateEmission": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "numero": {
+                        "type": "string"
+                    },
+                    "tva": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "totaltva": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "totalttc": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "statut": {
+                        "type": "boolean"
+                    },
+                    "image": {
+                        "$ref": "#/components/schemas/ImageData"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "fournisseur": {
+                        "type": "string"
+                    },
+                    "dateEcheance": {
+                        "type": "string",
+                        "format": "date"
                     }
                 }
             },
@@ -621,73 +979,6 @@
                         "type": "string"
                     },
                     "confirmationPassword": {
-                        "type": "string"
-                    }
-                }
-            },
-            "GrantedAuthority": {
-                "type": "object",
-                "properties": {
-                    "authority": {
-                        "type": "string"
-                    }
-                }
-            },
-            "User": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "firstName": {
-                        "type": "string"
-                    },
-                    "lastName": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "telephone": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "type": "string"
-                    },
-                    "role": {
-                        "type": "string",
-                        "enum": [
-                            "USER",
-                            "ADMIN",
-                            "MANAGER"
-                        ]
-                    },
-                    "accountLocked": {
-                        "type": "boolean"
-                    },
-                    "enabled": {
-                        "type": "boolean"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "accountNonExpired": {
-                        "type": "boolean"
-                    },
-                    "credentialsNonExpired": {
-                        "type": "boolean"
-                    },
-                    "authorities": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/GrantedAuthority"
-                        }
-                    },
-                    "accountNonLocked": {
-                        "type": "boolean"
-                    },
-                    "username": {
                         "type": "string"
                     }
                 }

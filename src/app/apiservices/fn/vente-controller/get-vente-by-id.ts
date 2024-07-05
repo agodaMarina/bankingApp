@@ -6,16 +6,16 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { Rapport } from '../../models/rapport';
 
-export interface GetRapport$Params {
-  date: string;
+export interface GetVenteById$Params {
+  id: number;
 }
 
-export function getRapport(http: HttpClient, rootUrl: string, params: GetRapport$Params, context?: HttpContext): Observable<StrictHttpResponse<Rapport>> {
-  const rb = new RequestBuilder(rootUrl, getRapport.PATH, 'get');
+export function getVenteById(http: HttpClient, rootUrl: string, params: GetVenteById$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+  const rb = new RequestBuilder(rootUrl, getVenteById.PATH, 'get');
   if (params) {
-    rb.path('date', params.date, {});
+    rb.path('id', params.id, {});
   }
 
   return http.request(
@@ -23,9 +23,10 @@ export function getRapport(http: HttpClient, rootUrl: string, params: GetRapport
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Rapport>;
+      return r as StrictHttpResponse<{
+      }>;
     })
   );
 }
 
-getRapport.PATH = '/rapport/getRapport/{date}';
+getVenteById.PATH = '/vente/get/{id}';

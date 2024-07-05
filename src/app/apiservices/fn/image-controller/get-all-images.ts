@@ -6,16 +6,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { Rapport } from '../../models/rapport';
 
-export interface GenerateRapport$Params {
-      body: Rapport
+export interface GetAllImages$Params {
 }
 
-export function generateRapport(http: HttpClient, rootUrl: string, params: GenerateRapport$Params, context?: HttpContext): Observable<StrictHttpResponse<Rapport>> {
-  const rb = new RequestBuilder(rootUrl, generateRapport.PATH, 'post');
+export function getAllImages(http: HttpClient, rootUrl: string, params?: GetAllImages$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<{
+}>>> {
+  const rb = new RequestBuilder(rootUrl, getAllImages.PATH, 'get');
   if (params) {
-    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -23,9 +21,10 @@ export function generateRapport(http: HttpClient, rootUrl: string, params: Gener
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Rapport>;
+      return r as StrictHttpResponse<Array<{
+      }>>;
     })
   );
 }
 
-generateRapport.PATH = '/rapport/save';
+getAllImages.PATH = '/images/all';

@@ -8,23 +8,23 @@ import { RequestBuilder } from '../../request-builder';
 
 
 export interface ActiveAccount$Params {
-  token: string;
+  id: number;
 }
 
-export function activeAccount(http: HttpClient, rootUrl: string, params: ActiveAccount$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-  const rb = new RequestBuilder(rootUrl, activeAccount.PATH, 'get');
+export function activeAccount(http: HttpClient, rootUrl: string, params: ActiveAccount$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+  const rb = new RequestBuilder(rootUrl, activeAccount.PATH, 'post');
   if (params) {
-    rb.query('token', params.token, {});
+    rb.path('id', params.id, {});
   }
 
   return http.request(
-    rb.build({ responseType: 'text', accept: '*/*', context })
+    rb.build({ responseType: 'blob', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      return r as StrictHttpResponse<string>;
     })
   );
 }
 
-activeAccount.PATH = '/auth/activate_account';
+activeAccount.PATH = '/admin/unlock/{id}';

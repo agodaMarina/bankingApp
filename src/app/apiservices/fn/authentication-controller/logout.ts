@@ -6,13 +6,12 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { Rapport } from '../../models/rapport';
 
-export interface GetAllRapport$Params {
+export interface Logout$Params {
 }
 
-export function getAllRapport(http: HttpClient, rootUrl: string, params?: GetAllRapport$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Rapport>>> {
-  const rb = new RequestBuilder(rootUrl, getAllRapport.PATH, 'get');
+export function logout(http: HttpClient, rootUrl: string, params?: Logout$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+  const rb = new RequestBuilder(rootUrl, logout.PATH, 'get');
   if (params) {
   }
 
@@ -21,9 +20,9 @@ export function getAllRapport(http: HttpClient, rootUrl: string, params?: GetAll
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<Rapport>>;
+      return r as StrictHttpResponse<string>;
     })
   );
 }
 
-getAllRapport.PATH = '/rapport/getAllReports';
+logout.PATH = '/auth/logout';

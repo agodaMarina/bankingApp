@@ -11,6 +11,8 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { downloadImage } from '../fn/image-controller/download-image';
 import { DownloadImage$Params } from '../fn/image-controller/download-image';
+import { getAllImages } from '../fn/image-controller/get-all-images';
+import { GetAllImages$Params } from '../fn/image-controller/get-all-images';
 import { uploadImage } from '../fn/image-controller/upload-image';
 import { UploadImage$Params } from '../fn/image-controller/upload-image';
 
@@ -49,14 +51,6 @@ export class ImageControllerService extends BaseService {
     );
   }
 
-  getImages(): Observable<any> {
-    return this.http.get(this.rootUrl+'/images/all');
-  }
-
-  uplaodImage(formData: FormData): Observable<any> {
-    return this.http.post(this.rootUrl+'/images/saveImage', formData);
-  }
-
   /** Path part for operation `downloadImage()` */
   static readonly DownloadImagePath = '/images/{fileName}';
 
@@ -83,6 +77,35 @@ export class ImageControllerService extends BaseService {
       map((r: StrictHttpResponse<{
 }>): {
 } => r.body)
+    );
+  }
+
+  /** Path part for operation `getAllImages()` */
+  static readonly GetAllImagesPath = '/images/all';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getAllImages()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllImages$Response(params?: GetAllImages$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<{
+}>>> {
+    return getAllImages(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getAllImages$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllImages(params?: GetAllImages$Params, context?: HttpContext): Observable<Array<{
+}>> {
+    return this.getAllImages$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<{
+}>>): Array<{
+}> => r.body)
     );
   }
 

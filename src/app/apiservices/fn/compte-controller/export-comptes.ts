@@ -6,16 +6,13 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { Facture } from '../../models/facture';
 
-export interface AjoutFactureManuelle$Params {
-      body: Facture
+export interface ExportComptes$Params {
 }
 
-export function ajoutFactureManuelle(http: HttpClient, rootUrl: string, params: AjoutFactureManuelle$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-  const rb = new RequestBuilder(rootUrl, ajoutFactureManuelle.PATH, 'post');
+export function exportComptes(http: HttpClient, rootUrl: string, params?: ExportComptes$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  const rb = new RequestBuilder(rootUrl, exportComptes.PATH, 'get');
   if (params) {
-    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -28,4 +25,4 @@ export function ajoutFactureManuelle(http: HttpClient, rootUrl: string, params: 
   );
 }
 
-ajoutFactureManuelle.PATH = '/facture/addFacture';
+exportComptes.PATH = '/comptes/getcompte';

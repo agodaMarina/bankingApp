@@ -2,14 +2,15 @@
   <div class="content container-fluid">
     <div class="page-header">
       <div class="content-page-header">
-        <h5>Factures</h5>
+        <h5>Achats</h5>
         <div class="list-btn">
           <ul class="filter-list">
             
             <li>
+              <!--
               <a class="btn btn-import" (click)="downloadExcel()"
                 ><span><i class="fe fe-check-square me-2"></i>Excel</span></a
-              >
+              >-->
             </li>
             <li>
               <a
@@ -25,33 +26,7 @@
           </ul>
         </div>
       </div>
-    </div>
-
-  <!-- <div id="filter_inputs" class="card filter-card">
-      <div class="card-body pb-0">
-        <div class="row">
-          <div class="col-sm-6 col-md-3">
-            <div class="input-block mb-3">
-              <label>Name</label>
-              <input type="text" class="form-control" />
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-3">
-            <div class="input-block mb-3">
-              <label>Email</label>
-              <input type="text" class="form-control" />
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-3">
-            <div class="input-block mb-3">
-              <label>Phone</label>
-              <input type="text" class="form-control" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
---> 
+    </div> 
     <div class="row">
       <div class="col-xl-2 col-lg-4 col-sm-6 col-12 d-flex">
         <div class="card inovices-card w-100">
@@ -246,7 +221,7 @@
                       <td>{{ item.tva }}</td>
                       <td>oui</td>
                       <td>{{ item.totalttc }}</td>
-                      <td>{{ item.date | date:'dd/MM/yyyy HH:mm'}}</td>
+                      <td>{{ item.dateEmission | date:'dd/MM/yyyy HH:mm'}}</td>
                       <td>{{ item.user?.email}}</td>
                       <td><span class="badge bg-success-light">Payé</span></td>
                       <td class="text-end">
@@ -306,12 +281,14 @@
     </div>
   </div>
 </div>
-<!--<div class="modal custom-modal modal-lg fade" id="add_user" role="dialog">
+
+
+<div class="modal custom-modal modal-lg fade" id="add_user" role="dialog">
   <div class="modal-dialog modal-dialog-centered modal-md">
     <div class="modal-content">
       <div class="modal-header border-0 pb-0">
         <div class="form-header modal-header-title text-start mb-0">
-          <h4 class="mb-0">Ajouter une Facture</h4>
+          <h4 class="mb-0">Ajouter une Facture </h4>
         </div>
         <button
           type="button"
@@ -323,73 +300,87 @@
       <form [formGroup]="factureForm" (ngSubmit)="onSubmit()">
         <div class="modal-body">
           <div class="row">
-            <div class="col-md-12">
-              <div class="card-body">
-                <div class="form-groups-item">
-                  <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <div class="input-block mb-3">
-                        <label>Numéro</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          formControlName="numero"
-                          placeholder="Entez le Numéro de la facture"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <div class="input-block mb-3">
-                        <label>TVA</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          formControlName="tva"
-                          placeholder="Entez la TVA appliquée (%)"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <div class="input-block mb-3">
-                        <label>TOTAL HT</label>
-                        <input
-                          type="number"
-                          class="form-control"
-                          formControlName="totalht"
-                          placeholder="Entez le  Montant Hors Taxe"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <div class="input-block mb-3">
-                        <label>Total TVA</label>
-                        <input
-                          type="number"
-                          class="form-control"
-                          formControlName="totaltva"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <div class="input-block mb-3">
-                        <label>Total TTC</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          formControlName="totalttc"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <div class="input-block">
-                        <label>Compte</label>
-                        <select formControlName="compte" class="form-control">
-                          <option>Veuillez choisir un compte</option>
-                          <option *ngFor="let item of comptes" value="item.description">{{item.description}}</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
+            <!-- Column for image upload -->
+            <div class="col-lg-6 col-md-12">
+              <div *ngIf="!imagePreview" class="image-upload">
+                <label>
+                  Chargez
+                  <a
+                    href="javascript:void(0)"
+                    class="custom-file-container__image-clear"
+                    title="Clear Image"
+                    (click)="clearImage()"
+                  ></a>
+                </label>
+                <label class="custom-file-container__custom-file">
+                  <input
+                    type="file"
+                    class="custom-file-container__custom-file__custom-file-input"
+                    accept="image/*"
+                    (change)="onFileSelected($event)"
+                  />
+                  <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                  <span class="custom-file-container__custom-file__custom-file-control"></span>
+                </label>
+              </div>
+              
+                <img *ngIf="imagePreview" [src]="imagePreview" alt="Image Preview" class="img-thumbnail mt-2" />
+                <button *ngIf="imagePreview" (click)="loadImage()" class="btn btn-primary mt-3">Upload</button>
+                <button *ngIf="imagePreview" (click)="clearImage()" class="btn btn-secondary mt-3">Retour</button>
+              
+            </div>
+            <!-- Column for form fields -->
+            <div class="col-lg-6 col-md-12" *ngIf="imagePreview">
+              <div class="form-groups-item">
+                <div class="input-block mb-3">
+                  <label>Fournisseur</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                  />
+                </div>
+                <div class="input-block mb-3">
+                  <label>Numéro</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="numero"
+                    placeholder="numéro"
+                  />
+                </div>
+                <div class="input-block mb-3">
+                  <label>Tva(%)</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="tva"
+                    placeholder="Entez la TVA appliquée (%)"
+                  />
+                </div>
+                <div class="input-block mb-3">
+                  <label>Total hors tax (XOF)</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="totalht"
+                    placeholder="Entez le  Montant Hors Taxe"
+                  />
+                </div>
+                <div class="input-block mb-3">
+                  <label>Total Tva</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="totaltva"
+                  />
+                </div>
+                <div class="input-block mb-3">
+                  <label>Total Ttc(XOF)</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="totalttc"
+                  />
                 </div>
               </div>
             </div>
@@ -404,9 +395,9 @@
             Annuler
           </button>
           <button
+            id="alert-success"
             type="submit"
-            data-bs-dismiss="modal"
-            class="btn btn-primary paid-continue-btn"
+            class="btn btn-primary btn-sm waves-effect waves-light"
           >
             Ajouter
           </button>
@@ -414,14 +405,13 @@
       </form>
     </div>
   </div>
-</div> -->
-
-<div class="modal custom-modal modal-lg fade" id="add_user" role="dialog">
+</div>
+<div class="modal custom-modal modal-lg fade" id="edit_user" role="dialog">
   <div class="modal-dialog modal-dialog-centered modal-md">
     <div class="modal-content">
       <div class="modal-header border-0 pb-0">
         <div class="form-header modal-header-title text-start mb-0">
-          <h4 class="mb-0">Ajouter une Facture</h4>
+          <h4 class="mb-0">Informations</h4>
         </div>
         <button
           type="button"
@@ -471,7 +461,7 @@
                     type="text"
                     class="form-control"
                     
-                    placeholder="Entez le Numéro de la facture"
+                    placeholder=""
                   />
                 </div>
                 <div class="input-block mb-3">
@@ -484,7 +474,7 @@
                   />
                 </div>
                 <div class="input-block mb-3">
-                  <label>TVA</label>
+                  <label>Tva(%)</label>
                   <input
                     type="text"
                     class="form-control"
@@ -493,7 +483,7 @@
                   />
                 </div>
                 <div class="input-block mb-3">
-                  <label>TOTAL HT</label>
+                  <label>TOTAL Hors Taxe (XOF)</label>
                   <input
                     type="number"
                     class="form-control"
@@ -502,7 +492,7 @@
                   />
                 </div>
                 <div class="input-block mb-3">
-                  <label>Total TVA</label>
+                  <label>Total Tva</label>
                   <input
                     type="number"
                     class="form-control"
@@ -510,7 +500,7 @@
                   />
                 </div>
                 <div class="input-block mb-3">
-                  <label>Total TTC</label>
+                  <label>Total Ttc</label>
                   <input
                     type="text"
                     class="form-control"
@@ -531,118 +521,6 @@
           </button>
           <button
             type="submit"
-            class="btn btn-primary paid-continue-btn"
-          >
-            Ajouter
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-<div class="modal custom-modal modal-lg fade" id="edit_user" role="dialog">
-  <div class="modal-dialog modal-dialog-centered modal-md">
-    <div class="modal-content">
-      <div class="modal-header border-0 pb-0">
-        <div class="form-header modal-header-title text-start mb-0">
-          <h4 class="mb-0">Modification de Facture</h4>
-        </div>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <form #f="ngForm">
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card-body">
-                <div class="form-groups-item">
-                  <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <div class="input-block mb-3">
-                        <label>Numéro</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          disabled
-                          value=""
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <div class="input-block mb-3">
-                        <label>TVA</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Enter Last Name"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <div class="input-block mb-3">
-                        <label>TOTAL HT</label>
-                        <input
-                          type="number"
-                          class="form-control"
-                          placeholder="Entrer un montant "
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <div class="input-block mb-3">
-                        <label>Total TVA</label>
-                        <input
-                          type="number"
-                          class="form-control"
-                          placeholder="Enter Email Address"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <div class="input-block mb-3">
-                        <label>Total TTC </label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Enter Phone Number"
-                          name="name"
-                        />
-                      </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <div class="input-block">
-                        <label>Statut</label>
-                        <select class="select">
-                          <option>Selectionner un Statut</option>
-                          <option>Actif</option>
-                          <option>Archivé</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            data-bs-dismiss="modal"
-            class="btn btn-back cancel-btn me-2"
-          >
-            Annuler
-          </button>
-          <button
-            type="submit"
-            data-bs-dismiss="modal"
             class="btn btn-primary paid-continue-btn"
           >
             Ajouter

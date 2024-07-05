@@ -7,24 +7,26 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 
-export interface DeleteRapport$Params {
+export interface DeleteAchat$Params {
   id: number;
 }
 
-export function deleteRapport(http: HttpClient, rootUrl: string, params: DeleteRapport$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-  const rb = new RequestBuilder(rootUrl, deleteRapport.PATH, 'delete');
+export function deleteAchat(http: HttpClient, rootUrl: string, params: DeleteAchat$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+  const rb = new RequestBuilder(rootUrl, deleteAchat.PATH, 'delete');
   if (params) {
     rb.path('id', params.id, {});
   }
 
   return http.request(
-    rb.build({ responseType: 'text', accept: '*/*', context })
+    rb.build({ responseType: 'blob', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      return r as StrictHttpResponse<{
+      }>;
     })
   );
 }
 
-deleteRapport.PATH = '/rapport/deleteRapport/{id}';
+deleteAchat.PATH = '/achat/delete/{id}';

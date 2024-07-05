@@ -4,10 +4,12 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
-import { RapportControllerService } from './services/rapport-controller.service';
+import { VenteControllerService } from './services/vente-controller.service';
+import { AchatControllerService } from './services/achat-controller.service';
 import { ImageControllerService } from './services/image-controller.service';
-import { FactureControllerService } from './services/facture-controller.service';
 import { AuthenticationControllerService } from './services/authentication-controller.service';
+import { AdminControllerService } from './services/admin-controller.service';
+import { CompteControllerService } from './services/compte-controller.service';
 
 /**
  * Module that provides all services and configuration.
@@ -17,10 +19,12 @@ import { AuthenticationControllerService } from './services/authentication-contr
   exports: [],
   declarations: [],
   providers: [
-    RapportControllerService,
+    VenteControllerService,
+    AchatControllerService,
     ImageControllerService,
-    FactureControllerService,
     AuthenticationControllerService,
+    AdminControllerService,
+    CompteControllerService,
     ApiConfiguration
   ],
 })

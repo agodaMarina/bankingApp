@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Facture } from 'src/app/apiservices/models';
-import { FactureControllerService } from 'src/app/apiservices/services';
-
+import { AchatControllerService } from 'src/app/apiservices/services';
+import { Achat } from 'src/app/apiservices/models/achat';
 @Component({
   selector: 'app-facture',
   templateUrl: './facture.component.html',
@@ -42,41 +41,24 @@ export class FactureComponent implements OnInit {
     }
   }
 
-  // loadImage(): void {
-  //   if (this.file) {
-  //     const formData = new FormData();
-  //     formData.append('image', this.file);
-  //     this.service.uploadImage(formData).subscribe(
-  //       data => {
-  //         console.log(data);
-  //         this.clearImage();
-  //       },
-  //       error => {
-  //         console.log(error);
-  //       }
-  //     );
-  //   }
-  // }
-
   clearImage(): void {
     this.file = null;
     this.imagePreview = null;
   }
 
   factureForm: FormGroup;
-  factures: Array<Facture> = [];
+  factures: Array<Achat> = [];
   comptes: Array<any> = [];
   numero: string = '';
-  compte: string = '';
   tva: number = 0;
   totaltva: number = 0;
   totalttc: number = 0;
-  facture!: Facture;
+  facture!: Achat;
   total: number = 0;
   idToDelete!: number;
 
   constructor(
-    private service: FactureControllerService,
+    private service: AchatControllerService,
     private fb: FormBuilder
   ) {
     this.factureForm = this.fb.group({
@@ -85,14 +67,13 @@ export class FactureComponent implements OnInit {
       totalht: [0],
       totaltva: [{ value: 0, disabled: true }],
       totalttc: [{ value: 0, disabled: true }],
-      compte: [''],
+      
     });
 
     this.onChanges();
   }
   ngOnInit(): void {
-    this.getAllFactures();
-    this.getCompte();
+   
   }
 
   onChanges(): void {
@@ -125,16 +106,16 @@ export class FactureComponent implements OnInit {
     this.tva = this.factureForm.get('tva')?.value;
     this.totaltva = this.factureForm.get('totaltva')?.value;
     this.totalttc = this.factureForm.get('totalttc')?.value;
-    this.compte = this.factureForm.get('compte')?.value;
+   
 
     this.facture = {
       numero: this.numero,
       tva: this.tva,
       totaltva: this.totaltva,
       totalttc: this.totalttc,
-      compte: this.compte,
+     
     };
-    this.service.ajoutFactureManuelle({ body: this.facture }).subscribe({
+    this.service.add(this.facture, this.file || undefined).subscribe({
       next: (res) => {
         console.log(res);
       },
@@ -142,18 +123,7 @@ export class FactureComponent implements OnInit {
         console.log(err);
       },
     });
-    this.getAllFactures();
-  }
-
-  getAllFactures(): Facture[] {
-    this.service.getAllFactures().subscribe(
-      (value: Array<Facture>) => {
-        this.factures = value;
-      },
-      (error: String) => {},
-      () => {}
-    );
-    return this.factures;
+    
   }
 
   setFactureIdToDelete(id: number | undefined): void {
@@ -164,38 +134,29 @@ export class FactureComponent implements OnInit {
     }
   }
 
-  deleteFacture(): void {
-    this.service.deleteFacture({ id: this.idToDelete }).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.getAllFactures();
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
+  // deleteFacture(): void {
+  //   this.service.deleteFacture({ id: this.idToDelete }).subscribe({
+  //     next: (res) => {
+  //       console.log(res);
+  //       this.getAllFactures();
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     },
+  //   });
+  // }
 
-  downloadExcel(): void {
-    this.service.exportFacturesToExcel().subscribe((response: Blob) => {
-      const blob = new Blob([response], { type: 'application/vnd.ms-excel' });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'factures.xlsx';
-      a.click();
-      window.URL.revokeObjectURL(url);
-    });
-  }
+  // downloadExcel(): void {
+  //   this.service.exportFacturesToExcel().subscribe((response: Blob) => {
+  //     const blob = new Blob([response], { type: 'application/vnd.ms-excel' });
+  //     const url = window.URL.createObjectURL(blob);
+  //     const a = document.createElement('a');
+  //     a.href = url;
+  //     a.download = 'factures.xlsx';
+  //     a.click();
+  //     window.URL.revokeObjectURL(url);
+  //   });
+  // }
 
-  getCompte() {
-    this.service.getCompte().subscribe(
-      (value: any) => {
-        this.comptes = value;
-        console.log(this.comptes);
-      },
-      (error: String) => {},
-      () => {}
-    );
-  }
+ 
 }
